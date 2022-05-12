@@ -10,17 +10,27 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-//производитель
+//продавец
 @Getter
 @Setter
 @Entity
-@Table(name = "manufacturer")
+@Table(name = "sale_organisation")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Manufacturer extends PersistentObject {
+public class SaleOrganisation extends PersistentObject {
 
     @Column(name = "name")
     String name;
 
-    @Column(name = "logo")
-    String logo;
+    @Column(name = "owner_id")
+    User user;
+
+    @Column(name = "inn")
+    String inn;
+
+    @Column(name = "bik")
+    String bik;
+
+    @Column(name = "description")
+    String description;
+
 }

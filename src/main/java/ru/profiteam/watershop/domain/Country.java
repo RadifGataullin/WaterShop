@@ -10,17 +10,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-//производитель
+// страны
 @Getter
 @Setter
 @Entity
-@Table(name = "manufacturer")
+@Table(name = "country")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Manufacturer extends PersistentObject {
+public class Country extends PersistentObject {
 
     @Column(name = "name")
     String name;
-
-    @Column(name = "logo")
-    String logo;
 }

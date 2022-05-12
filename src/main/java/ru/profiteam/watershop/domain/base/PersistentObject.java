@@ -1,15 +1,29 @@
 package ru.profiteam.watershop.domain.base;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Getter
+@Setter
 @MappedSuperclass
+@FieldDefaults(level = AccessLevel.PROTECTED)
 public class PersistentObject {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    Long id;
 
+    @Column(name = "created_at", nullable = false)
+    Date createdAt;
 
+    @Column(name = "updated_at")
+    Date updatedAt;
+
+    @Column(name = "deleted_at")
+    Date deletedAt;
 }

@@ -1,0 +1,18 @@
+server:
+  port: 7004
+  servlet:
+    encoding:
+      charset: UTF-8
+      force-response: true
+spring:
+  datasource:
+    password: 89187786606Alex
+    url: jdbc:postgresql://localhost:5432/watershop
+    username: postgres
+    testWhileIdle: true
+    test-on-borrow: true
+    hikari:
+      maxLifetime: 900000
+    jpa:
+      hibernate:
+        ddl-auto: create

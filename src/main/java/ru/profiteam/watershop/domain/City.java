@@ -6,21 +6,21 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-//производитель
+//города
 @Getter
 @Setter
 @Entity
-@Table(name = "manufacturer")
+@Table(name = "city")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Manufacturer extends PersistentObject {
+public class City extends PersistentObject {
 
     @Column(name = "name")
     String name;
 
-    @Column(name = "logo")
-    String logo;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    Country country;
+
 }

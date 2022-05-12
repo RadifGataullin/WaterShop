@@ -2,7 +2,8 @@ package ru.profiteam.watershop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.profiteam.watershop.domain.Employee;
+import ru.profiteam.watershop.domain.SaleOrganisation;
+
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee,Long> {
+public interface SaleOrganisationRepository extends JpaRepository<SaleOrganisation, Long> {
 }
