@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
 
 import javax.persistence.*;
+import java.util.List;
 
 //адрес клиента
 @Getter
@@ -21,7 +22,7 @@ public class Address extends PersistentObject {
     @Column(name = "longitude")
     String longitude;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "city_id")
     City city;
 
@@ -40,7 +41,6 @@ public class Address extends PersistentObject {
     @Column(name = "elevator")
     boolean elevator;
 
-    @ManyToMany
-    @JoinColumn(name = "user_id")
-    User user;
+    @OneToMany(mappedBy = "address")
+    List<AddressToUser> addressToUser;
 }

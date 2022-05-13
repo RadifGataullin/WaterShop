@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Order extends PersistentObject {
 
@@ -25,8 +25,8 @@ public class Order extends PersistentObject {
     @Column(name = "data")
     String data;
 
-    @OneToOne
-    @JoinColumn
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     User user;
 
     @Column(name = "product_count")

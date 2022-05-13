@@ -1,36 +1,29 @@
 package ru.profiteam.watershop.domain;
 
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-//продавец
 @Getter
 @Setter
 @Entity
-@Table(name = "sale_organisation")
+@Table(name = "product_to_order")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SaleOrganisation extends PersistentObject {
+public class AddressToUser extends PersistentObject {
 
-    @Column(name = "name")
-    String name;
-
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    Address address;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
-
-    @Column(name = "inn")
-    String inn;
-
-    @Column(name = "bik")
-    String bik;
-
-    @Column(name = "description")
-    String description;
-
 }

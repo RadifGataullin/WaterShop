@@ -21,7 +21,7 @@ public class Session extends PersistentObject {
     @Column(name = "logout_date")
     String logoutDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
 

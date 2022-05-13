@@ -5,14 +5,11 @@ server:
       charset: UTF-8
       force-response: true
 spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
   datasource:
     password: 89187786606Alex
     url: jdbc:postgresql://localhost:5432/watershop
     username: postgres
-    testWhileIdle: true
-    test-on-borrow: true
-    hikari:
-      maxLifetime: 900000
-    jpa:
-      hibernate:
-        ddl-auto: create
