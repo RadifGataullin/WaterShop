@@ -24,7 +24,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void crate(CreateAddressDto request) {
+    public void create(CreateAddressDto request) {
         Address address = new Address();
         address.setFlat(request.getFlat());
         address.setElevator(request.isElevator());

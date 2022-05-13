@@ -4,5 +4,5 @@ import ru.profiteam.watershop.dto.request.CreateAddressDto;
 
 public interface AddressService {
 
-    void crate(CreateAddressDto request);
+    void create(CreateAddressDto request);
 }
