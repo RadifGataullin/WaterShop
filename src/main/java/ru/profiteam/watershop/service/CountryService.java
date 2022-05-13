@@ -4,4 +4,5 @@ import ru.profiteam.watershop.dto.request.CreateCountryDto;
 
 public interface CountryService {
     void create(CreateCountryDto request);
+
 }
