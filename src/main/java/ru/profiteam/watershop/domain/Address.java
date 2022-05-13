@@ -41,6 +41,9 @@ public class Address extends PersistentObject {
     @Column(name = "elevator")
     boolean elevator;
 
-    @OneToMany(mappedBy = "address")
-    List<AddressToUser> addressToUser;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
+
 }

@@ -40,6 +40,10 @@ public class User extends PersistentObject {
     @JoinColumn(name = "city_id")
     City city;
 
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    Address address;
+
 
 
 }
