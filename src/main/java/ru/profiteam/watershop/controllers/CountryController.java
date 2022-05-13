@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.profiteam.watershop.dto.request.CreateCountryDto;
@@ -27,7 +28,7 @@ public class CountryController {
     }
 
     @PostMapping("create")
-    public void create(CreateCountryDto request) {
+    public void create(@RequestBody CreateCountryDto request) {
         countryService.create(request);
     }
 }
