@@ -4,10 +4,7 @@ import lombok.Data;
 
 @Data
 public class ManufacturerDto {
-
     Long id;
-
     String logo;
-
     String name;
 }

@@ -6,5 +6,6 @@ import java.util.List;
 
 @Data
 public class CountryDto {
-    List<CountryDto> countryDtoList;
+    Long id;
+    String name;
 }

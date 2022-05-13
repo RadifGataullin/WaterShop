@@ -38,7 +38,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public List<ManufacturerDto> getAll() {
-        manufacturerRepository.findAll();
-
+        List<Manufacturer> manufacturerList = manufacturerRepository.findAll();
+        /// преобразовать лист мануфактуреров в мануфактуреров дто и ретернуть
+        return null;
     }
 }
