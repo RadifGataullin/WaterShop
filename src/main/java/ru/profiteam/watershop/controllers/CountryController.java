@@ -1,4 +1,4 @@
-package ru.profiteam.watershop.contollers;
+package ru.profiteam.watershop.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
