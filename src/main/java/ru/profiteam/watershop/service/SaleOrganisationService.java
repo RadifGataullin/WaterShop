@@ -1,4 +1,4 @@
 package ru.profiteam.watershop.service;
 
-public class SeleOrganisationService {
+public interface SaleOrganisationService {
 }
