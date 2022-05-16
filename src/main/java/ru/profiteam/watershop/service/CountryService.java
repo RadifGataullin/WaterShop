@@ -8,5 +8,8 @@ import java.util.List;
 public interface CountryService {
     void create(CreateCountryDto request);
     List<CountryDto> getAll();
+    CountryDto getById(Long requestId);
+    void update(Long requestId, CreateCountryDto request);
+    void deleteById(Long requestId);
 
 }
