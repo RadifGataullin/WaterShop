@@ -28,7 +28,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public void crate(CreateManufacturerDto request){
+    public void create(CreateManufacturerDto request){
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setLogo(request.getLogo());
         manufacturer.setName(request.getName());

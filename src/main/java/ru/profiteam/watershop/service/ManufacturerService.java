@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ManufacturerService {
 
-    void crate(CreateManufacturerDto request);
+    void create(CreateManufacturerDto request);
 
     List<ManufacturerDto> getAll();
 }

@@ -29,6 +29,6 @@ public class ManufacturerController {
 
     @PostMapping("create")
     public void create(@RequestBody CreateManufacturerDto request){
-        manufacturerService.crate(request);
+        manufacturerService.create(request);
     }
 }
