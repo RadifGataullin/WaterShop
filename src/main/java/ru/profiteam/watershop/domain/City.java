@@ -22,5 +22,4 @@ public class City extends PersistentObject {
     @ManyToOne
     @JoinColumn(name = "country_id")
     Country country;
-
 }
