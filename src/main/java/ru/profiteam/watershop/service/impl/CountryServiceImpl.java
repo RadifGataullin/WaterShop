@@ -5,27 +5,30 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import ru.profiteam.watershop.builder.CountryBuilder;
 import ru.profiteam.watershop.domain.Country;
 import ru.profiteam.watershop.dto.request.CreateCountryDto;
 import ru.profiteam.watershop.dto.response.CountryDto;
 import ru.profiteam.watershop.repository.CountryRepository;
 import ru.profiteam.watershop.service.CountryService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CountryServiceImpl implements CountryService {
     CountryRepository countryRepository;
+    CountryBuilder countryBuilder;
 
     @Autowired
-    public CountryServiceImpl(CountryRepository countryRepository) {
+    public CountryServiceImpl(CountryRepository countryRepository,
+                              CountryBuilder countryBuilder) {
         this.countryRepository = countryRepository;
+        this.countryBuilder = countryBuilder;
     }
 
 
@@ -42,27 +45,27 @@ public class CountryServiceImpl implements CountryService {
         List<Country> countryList = countryRepository.findAll();
         List<CountryDto> countryDtoList = new ArrayList<>();
         for (Country item : countryList) {
-            CountryDto countryDto = new CountryDto();
-            countryDto.setId(item.getId());
-            countryDto.setName(item.getName());
-            countryDtoList.add(countryDto);
+            countryDtoList.add(countryBuilder.build(item));
         }
         return countryDtoList;
     }
 
     @Override
-    public CountryDto getById(Long requestId) {
-        CountryDto countryDto = new CountryDto();
-        countryDto.setName(countryRepository.getById(requestId).getName());
-        countryDto.setId(countryRepository.getById(requestId).getId());
-        return countryDto;
+    public CountryDto getById(Long id) {
+        Optional<Country> countryOpt = countryRepository.findById(id);
+        if (countryOpt.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Элемент с id = " + id + " не найден");
+        }
+        return countryBuilder.build(countryOpt.get());
     }
 
     @Override
-    public void update(Long requestId, CreateCountryDto request) {
+    public void update(Long id, CreateCountryDto request) {
         List<Country> countryList = countryRepository.findAll();
         for(Country item: countryList){
-            if(Objects.equals(item.getId(), requestId)){
+            if(Objects.equals(item.getId(), id)){
                 item.setName(request.getName());
             }
         }
@@ -70,8 +73,8 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public void deleteById(Long requestId) {
-        countryRepository.deleteById(requestId);
+    public void deleteById(Long id) {
+        countryRepository.deleteById(id);
     }
 
 

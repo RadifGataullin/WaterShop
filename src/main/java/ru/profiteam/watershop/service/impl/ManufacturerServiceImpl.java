@@ -5,28 +5,30 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import ru.profiteam.watershop.builder.ManufacterBuilder;
 import ru.profiteam.watershop.domain.Manufacturer;
-import ru.profiteam.watershop.dto.request.CreateCountryDto;
 import ru.profiteam.watershop.dto.request.CreateManufacturerDto;
 import ru.profiteam.watershop.dto.response.ManufacturerDto;
 import ru.profiteam.watershop.repository.ManufacturerRepository;
 import ru.profiteam.watershop.service.ManufacturerService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ManufacturerServiceImpl implements ManufacturerService {
-
     ManufacturerRepository manufacturerRepository;
+    ManufacterBuilder manufacterBuilder;
 
     @Autowired
-    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository) {
+    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository,
+                                   ManufacterBuilder manufacterBuilder) {
         this.manufacturerRepository = manufacturerRepository;
+        this.manufacterBuilder = manufacterBuilder;
     }
 
     @Override
@@ -43,38 +45,37 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         List<Manufacturer> manufacturerList = manufacturerRepository.findAll();
         List<ManufacturerDto> manufacturerDtoList = new ArrayList<>();
         for(Manufacturer item: manufacturerList){
-            ManufacturerDto manufacturerDto = new ManufacturerDto();
-            manufacturerDto.setId(item.getId());
-            manufacturerDto.setName(item.getName());
-            manufacturerDto.setLogo(item.getLogo());
-            manufacturerDtoList.add(manufacturerDto);
+            manufacturerDtoList.add(manufacterBuilder.build(item));
         }
         return manufacturerDtoList;
     }
 
     @Override
-    public ManufacturerDto getById(Long requestId) {
-        ManufacturerDto manufacturerDto = new ManufacturerDto();
-        manufacturerDto.setId(manufacturerRepository.getById(requestId).getId());
-        manufacturerDto.setName(manufacturerRepository.getById(requestId).getName());
-        manufacturerDto.setLogo(manufacturerRepository.getById(requestId).getLogo());
-        return manufacturerDto;
+    public ManufacturerDto getById(Long id) {
+        Optional<Manufacturer> manufacturerOpt = manufacturerRepository.findById(id);
+        if (manufacturerOpt.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Элемент с id = " + id + " не найден");
+        }
+        return manufacterBuilder.build(manufacturerOpt.get());
     }
 
     @Override
-    public void update(Long requestId, CreateManufacturerDto request) {
+    public void update(Long id, CreateManufacturerDto request) {
         List<Manufacturer> manufacturerList = manufacturerRepository.findAll();
         for(Manufacturer item: manufacturerList){
-            if(item.getId() == requestId){
+            if(Objects.equals(item.getId(), id)){
                 item.setName(request.getName());
                 item.setLogo(request.getLogo());
+
             }
         }
         manufacturerRepository.saveAll(manufacturerList);
     }
 
     @Override
-    public void deleteById(Long requestId) {
-        manufacturerRepository.deleteById(requestId);
+    public void deleteById(Long id) {
+        manufacturerRepository.deleteById(id);
     }
 }

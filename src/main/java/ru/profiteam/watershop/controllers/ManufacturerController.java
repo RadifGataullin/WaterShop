@@ -41,17 +41,17 @@ public class ManufacturerController {
     }
 
     @GetMapping("get-by-id")
-    ManufacturerDto getById(Long requestId){
-        return manufacturerService.getById(requestId);
+    ManufacturerDto getById(Long id){
+        return manufacturerService.getById(id);
     }
 
     @PutMapping("update")
-    void update(Long requestId, @RequestBody CreateManufacturerDto request){
-        manufacturerService.update(requestId, request);
+    void update(Long id, @RequestBody CreateManufacturerDto request){
+        manufacturerService.update(id, request);
     }
 
     @DeleteMapping("delete-by-id")
-    void deleteById(Long requestId){
-        manufacturerService.deleteById(requestId);
+    void deleteById(Long id){
+        manufacturerService.deleteById(id);
     }
 }

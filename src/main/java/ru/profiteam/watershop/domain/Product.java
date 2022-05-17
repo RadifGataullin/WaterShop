@@ -1,8 +1,6 @@
 package ru.profiteam.watershop.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
 import ru.profiteam.watershop.domain.enums.ProductContainerMaterialType;
@@ -19,7 +17,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product extends PersistentObject {
 
-    @Column(name = "context")
+    @Column(name = "name")
     String name;
 
     @Column(name = "product_type")
@@ -39,7 +37,6 @@ public class Product extends PersistentObject {
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     Manufacturer manufacturer;
-
 
 
     @OneToMany(mappedBy = "product")

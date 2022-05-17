@@ -8,48 +8,49 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import ru.profiteam.watershop.dto.request.CreateCountryDto;
+import ru.profiteam.watershop.dto.request.CreateProductDto;
 import ru.profiteam.watershop.dto.response.CountryDto;
-import ru.profiteam.watershop.service.CountryService;
+import ru.profiteam.watershop.dto.response.ProductDto;
+import ru.profiteam.watershop.service.ProductService;
 
 import java.util.List;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @RestController
-@RequestMapping("country")
-@Tag(name = "Country")
+@RequestMapping("product")
+@Tag(name = "Product")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CountryController {
+public class ProductController {
+    ProductService productService;
 
-    CountryService countryService;
 
     @Autowired
-    public CountryController(CountryService countryService) {
-        this.countryService = countryService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @PostMapping("create")
-    public void create(@RequestBody CreateCountryDto request) {
-        countryService.create(request);
+    public void create(@RequestBody CreateProductDto request) {
+        productService.create(request);
     }
 
     @GetMapping("get-all")
-    public List<CountryDto> getAll(){
-        return countryService.getAll();
+    public List<ProductDto> getAll(){
+        return productService.getAll();
     }
 
     @GetMapping("get-by-id")
-    CountryDto getById(Long id){
-        return countryService.getById(id);
+    ProductDto getById(Long id){
+        return productService.getById(id);
     }
 
     @PutMapping("update")
-    void update(Long id, @RequestBody CreateCountryDto request){
-        countryService.update(id, request);
+    void update(Long id, @RequestBody CreateProductDto request){
+        productService.update(id, request);
     }
 
     @DeleteMapping("delete-by-id")
     void deleteById(Long id){
-        countryService.deleteById(id);
+        productService.deleteById(id);
     }
-
 }
