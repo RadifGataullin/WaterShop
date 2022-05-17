@@ -43,7 +43,7 @@ public class CountryController {
     }
 
     @PutMapping("update")
-    void update(Long requestId, CreateCountryDto request){
+    void update(Long requestId, @RequestBody CreateCountryDto request){
         countryService.update(requestId, request);
     }
 

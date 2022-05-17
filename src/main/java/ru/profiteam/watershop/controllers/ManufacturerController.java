@@ -46,7 +46,7 @@ public class ManufacturerController {
     }
 
     @PutMapping("update")
-    void update(Long requestId, CreateManufacturerDto request){
+    void update(Long requestId, @RequestBody CreateManufacturerDto request){
         manufacturerService.update(requestId, request);
     }
 
