@@ -8,6 +8,8 @@ import ru.profiteam.watershop.domain.Country;
 import ru.profiteam.watershop.dto.request.CreateCountryDto;
 import ru.profiteam.watershop.dto.response.CountryDto;
 
+import java.util.Date;
+
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CountryBuilderImpl implements CountryBuilder {
@@ -17,5 +19,19 @@ public class CountryBuilderImpl implements CountryBuilder {
                 .id(country.getId())
                 .name(country.getName())
                 .build();
+    }
+
+    @Override
+    public Country build(CreateCountryDto request) {
+        Country country = new Country();
+        country.setName(request.getName());
+        country.setCreatedAt(new Date());
+        return country;
+    }
+
+    @Override
+    public void update(Country country, CreateCountryDto request) {
+        country.setName(request.getName());
+        country.setUpdatedAt(new Date());
     }
 }

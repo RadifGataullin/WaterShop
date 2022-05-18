@@ -10,8 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.profiteam.watershop.builder.CityBuilder;
 import ru.profiteam.watershop.domain.City;
 import ru.profiteam.watershop.domain.Country;
-import ru.profiteam.watershop.domain.Manufacturer;
-import ru.profiteam.watershop.domain.Product;
 import ru.profiteam.watershop.dto.request.CreateCityDto;
 import ru.profiteam.watershop.dto.response.CityDto;
 import ru.profiteam.watershop.repository.CityRepository;
@@ -38,13 +36,11 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public void create(CreateCityDto request) {
-        City city = new City();
-        city.setName(request.getName());
-        city.setCreatedAt(new Date());
-
-        Country country = countryRepository.getById(request.getCountryId());
-        city.setCountry(country);
-
+        Optional<Country> countryOpt = countryRepository.findById(request.getCountryId());
+        if (countryOpt.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        City city = cityBuilder.build(request, countryOpt.get());
         cityRepository.save(city);
     }
 
@@ -62,32 +58,31 @@ public class CityServiceImpl implements CityService {
     public CityDto getById(Long id) {
         Optional<City> cityOpt = cityRepository.findById(id);
         if (cityOpt.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Элемент с id = " + id + " не найден");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         return cityBuilder.build(cityOpt.get());
     }
 
     @Override
     public void update(Long id, CreateCityDto request) {
-        List<City> cityList = cityRepository.findAll();
-
-        for(City item: cityList){
-            if(Objects.equals(item.getId(), id)){
-                item.setName(request.getName());
-
-                Country country = new Country();
-                country.setId(item.getCountry().getId());
-                country.setName(item.getCountry().getName());
-                item.setCountry(country);
-            }
+        Optional<City> cityOpt = cityRepository.findById(id);
+        if (cityOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        cityRepository.saveAll(cityList);
+        Optional<Country> countryOpt = countryRepository.findById(id);
+        if (countryOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        City updateCity = cityOpt.get();
+        cityBuilder.update(updateCity, request, countryOpt.get());
     }
 
     @Override
     public void deleteById(Long id) {
+        Optional<City> cityOpt = cityRepository.findById(id);
+        if (cityOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         cityRepository.deleteById(id);
     }
 }

@@ -33,10 +33,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public void create(CreateManufacturerDto request){
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setLogo(request.getLogo());
-        manufacturer.setName(request.getName());
-        manufacturer.setCreatedAt(new Date());
+        Manufacturer manufacturer = manufacterBuilder.build(request);
         manufacturerRepository.save(manufacturer);
     }
 
@@ -54,28 +51,28 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public ManufacturerDto getById(Long id) {
         Optional<Manufacturer> manufacturerOpt = manufacturerRepository.findById(id);
         if (manufacturerOpt.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Элемент с id = " + id + " не найден");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         return manufacterBuilder.build(manufacturerOpt.get());
     }
 
     @Override
     public void update(Long id, CreateManufacturerDto request) {
-        List<Manufacturer> manufacturerList = manufacturerRepository.findAll();
-        for(Manufacturer item: manufacturerList){
-            if(Objects.equals(item.getId(), id)){
-                item.setName(request.getName());
-                item.setLogo(request.getLogo());
-
-            }
+        Optional<Manufacturer> manufacturerOpt = manufacturerRepository.findById(id);
+        if (manufacturerOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        manufacturerRepository.saveAll(manufacturerList);
+        Manufacturer updateManufacturer = manufacturerOpt.get();
+        manufacterBuilder.update(updateManufacturer, request);
+        manufacturerRepository.save(updateManufacturer);
     }
 
     @Override
     public void deleteById(Long id) {
+        Optional<Manufacturer> manufacturerOpt = manufacturerRepository.findById(id);
+        if (manufacturerOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         manufacturerRepository.deleteById(id);
     }
 }

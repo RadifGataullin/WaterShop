@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ru.profiteam.watershop.builder.CountryBuilder;
+import ru.profiteam.watershop.domain.City;
 import ru.profiteam.watershop.domain.Country;
+import ru.profiteam.watershop.domain.Product;
 import ru.profiteam.watershop.dto.request.CreateCountryDto;
 import ru.profiteam.watershop.dto.response.CountryDto;
 import ru.profiteam.watershop.repository.CountryRepository;
@@ -34,9 +36,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public void create(CreateCountryDto request) {
-        Country country = new Country();
-        country.setName(request.getName());
-        country.setCreatedAt(new Date());
+        Country country = countryBuilder.build(request);
         countryRepository.save(country);
     }
 
@@ -54,28 +54,28 @@ public class CountryServiceImpl implements CountryService {
     public CountryDto getById(Long id) {
         Optional<Country> countryOpt = countryRepository.findById(id);
         if (countryOpt.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Элемент с id = " + id + " не найден");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         return countryBuilder.build(countryOpt.get());
     }
 
     @Override
     public void update(Long id, CreateCountryDto request) {
-        List<Country> countryList = countryRepository.findAll();
-        for(Country item: countryList){
-            if(Objects.equals(item.getId(), id)){
-                item.setName(request.getName());
-            }
+        Optional<Country> countryOpt = countryRepository.findById(id);
+        if (countryOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        countryRepository.saveAll(countryList);
+        Country updateCountry = countryOpt.get();
+        countryBuilder.update(updateCountry, request);
+        countryRepository.save(updateCountry);
     }
 
     @Override
     public void deleteById(Long id) {
+        Optional<Country> countryOpt = countryRepository.findById(id);
+        if (countryOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         countryRepository.deleteById(id);
     }
-
-
 }
