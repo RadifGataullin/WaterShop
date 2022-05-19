@@ -1,5 +1,8 @@
 package ru.profiteam.watershop.builder.impl;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,6 +15,8 @@ import java.util.Date;
 
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class CountryBuilderImpl implements CountryBuilder {
     @Override
     public CountryDto build(Country country) {

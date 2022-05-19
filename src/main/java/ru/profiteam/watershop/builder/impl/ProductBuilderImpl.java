@@ -14,7 +14,6 @@ import ru.profiteam.watershop.domain.Product;
 import ru.profiteam.watershop.domain.Seller;
 import ru.profiteam.watershop.dto.request.CreateProductDto;
 import ru.profiteam.watershop.dto.response.ProductDto;
-import ru.profiteam.watershop.dto.response.SellerDto;
 
 import java.util.Date;
 

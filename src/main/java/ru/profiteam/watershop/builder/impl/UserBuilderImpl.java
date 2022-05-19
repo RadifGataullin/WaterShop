@@ -22,6 +22,7 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 public class UserBuilderImpl implements UserBuilder {
+
     CityBuilder cityBuilder;
     AddressBuilder addressBuilder;
 

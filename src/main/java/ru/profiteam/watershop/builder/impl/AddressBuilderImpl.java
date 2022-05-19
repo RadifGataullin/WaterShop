@@ -1,5 +1,11 @@
 package ru.profiteam.watershop.builder.impl;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import ru.profiteam.watershop.builder.AddressBuilder;
 import ru.profiteam.watershop.builder.CityBuilder;
 import ru.profiteam.watershop.builder.UserBuilder;
@@ -11,6 +17,10 @@ import ru.profiteam.watershop.dto.response.AddressDto;
 
 import java.util.Date;
 
+@Component
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class AddressBuilderImpl implements AddressBuilder {
     UserBuilder userBuilder;
     CityBuilder cityBuilder;
