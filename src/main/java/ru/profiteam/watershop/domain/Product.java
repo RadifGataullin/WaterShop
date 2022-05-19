@@ -5,6 +5,7 @@ import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
 import ru.profiteam.watershop.domain.enums.ProductContainerMaterialType;
 import ru.profiteam.watershop.domain.enums.ProductType;
+import ru.profiteam.watershop.dto.response.SellerDto;
 
 import javax.persistence.*;
 import java.util.List;
@@ -33,6 +34,10 @@ public class Product extends PersistentObject {
 
     @Column(name = "volume")
     float volume;
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    Seller seller;
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")

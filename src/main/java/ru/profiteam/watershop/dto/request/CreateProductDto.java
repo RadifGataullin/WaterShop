@@ -22,5 +22,6 @@ public class CreateProductDto {
     ProductContainerMaterialType productContainerMaterialType;
     int price;
     float volume;
+    Long sellerId;
     Long manufactureId;
 }

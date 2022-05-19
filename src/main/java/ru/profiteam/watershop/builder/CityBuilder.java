@@ -6,6 +6,7 @@ import ru.profiteam.watershop.dto.request.CreateCityDto;
 import ru.profiteam.watershop.dto.response.CityDto;
 
 public interface CityBuilder {
+
     CityDto build(City city);
 
     City build(CreateCityDto request, Country country);

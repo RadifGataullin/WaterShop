@@ -11,10 +11,12 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.profiteam.watershop.builder.ProductBuilder;
 import ru.profiteam.watershop.domain.Manufacturer;
 import ru.profiteam.watershop.domain.Product;
+import ru.profiteam.watershop.domain.Seller;
 import ru.profiteam.watershop.dto.request.CreateProductDto;
 import ru.profiteam.watershop.dto.response.ProductDto;
 import ru.profiteam.watershop.repository.ManufacturerRepository;
 import ru.profiteam.watershop.repository.ProductRepository;
+import ru.profiteam.watershop.repository.SellerRepository;
 import ru.profiteam.watershop.service.ProductService;
 
 import java.util.ArrayList;
@@ -27,24 +29,30 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
     ManufacturerRepository manufacturerRepository;
+    SellerRepository sellerRepository;
     ProductBuilder productBuilder;
 
     @Autowired
     public ProductServiceImpl(ProductRepository productRepository,
                               ManufacturerRepository manufacturerRepository,
-                              ProductBuilder productBuilder) {
+                              SellerRepository sellerRepository, ProductBuilder productBuilder) {
         this.productRepository = productRepository;
         this.manufacturerRepository = manufacturerRepository;
+        this.sellerRepository = sellerRepository;
         this.productBuilder = productBuilder;
     }
 
     @Override
     public void create(CreateProductDto request) {
+        Optional<Seller> sellerOpt = sellerRepository.findById(request.getSellerId());
+        if (sellerOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         Optional<Manufacturer> manufacturerOpt = manufacturerRepository.findById(request.getManufactureId());
         if (manufacturerOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        Product product = productBuilder.build(request, manufacturerOpt.get());
+        Product product = productBuilder.build(request, manufacturerOpt.get(), sellerOpt.get());
         productRepository.save(product);
     }
 
@@ -73,12 +81,16 @@ public class ProductServiceImpl implements ProductService {
         if (productOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+        Optional<Seller> sellerOpt = sellerRepository.findById(request.getSellerId());
+        if (sellerOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         Optional<Manufacturer> manufacturerOpt = manufacturerRepository.findById(request.getManufactureId());
         if (manufacturerOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         Product updateProduct = productOpt.get();
-        productBuilder.update(updateProduct, request, manufacturerOpt.get());
+        productBuilder.update(updateProduct, request, manufacturerOpt.get(), sellerOpt.get());
         productRepository.save(updateProduct);
     }
 

@@ -8,11 +8,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.profiteam.watershop.builder.ManufacterBuilder;
 import ru.profiteam.watershop.builder.ProductBuilder;
+import ru.profiteam.watershop.builder.SellerBuilder;
 import ru.profiteam.watershop.domain.Manufacturer;
 import ru.profiteam.watershop.domain.Product;
+import ru.profiteam.watershop.domain.Seller;
 import ru.profiteam.watershop.dto.request.CreateProductDto;
-import ru.profiteam.watershop.dto.response.ManufacturerDto;
 import ru.profiteam.watershop.dto.response.ProductDto;
+import ru.profiteam.watershop.dto.response.SellerDto;
 
 import java.util.Date;
 
@@ -23,6 +25,7 @@ import java.util.Date;
 public class ProductBuilderImpl implements ProductBuilder {
 
     ManufacterBuilder manufacterBuilder;
+    SellerBuilder sellerBuilder;
 
     @Override
     public ProductDto build(Product product) {
@@ -33,12 +36,15 @@ public class ProductBuilderImpl implements ProductBuilder {
                 .productContainerMaterialType(product.getProductContainerMaterialType())
                 .price(product.getPrice())
                 .volume(product.getVolume())
+                .seller(sellerBuilder.build(product.getSeller()))
                 .manufacturer(manufacterBuilder.build(product.getManufacturer()))
                 .build();
     }
 
     @Override
-    public Product build(CreateProductDto request, Manufacturer manufacturer) {
+    public Product build(CreateProductDto request,
+                         Manufacturer manufacturer,
+                         Seller seller) {
         Product product = new Product();
         product.setName(request.getName());
         product.setProductType(request.getProductType());
@@ -46,12 +52,16 @@ public class ProductBuilderImpl implements ProductBuilder {
         product.setPrice(request.getPrice());
         product.setVolume(request.getVolume());
         product.setCreatedAt(new Date());
+
         product.setManufacturer(manufacturer);
         return product;
     }
 
     @Override
-    public void update(Product product, CreateProductDto request, Manufacturer manufacturer) {
+    public void update(Product product,
+                       CreateProductDto request,
+                       Manufacturer manufacturer,
+                       Seller seller) {
         product.setName(request.getName());
         product.setProductType(request.getProductType());
         product.setProductContainerMaterialType(request.getProductContainerMaterialType());

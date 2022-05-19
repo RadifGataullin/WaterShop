@@ -4,21 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.profiteam.watershop.domain.User;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddressDto {
+public class SellerToUserDto {
     Long id;
-    String latitude;
-    String longitude;
-    CityDto city;
-    String street;
-    String house;
-    String flat;
-    String level;
-    boolean elevator;
+    SellerDto seller;
     UserDto user;
-
 }

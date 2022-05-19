@@ -9,16 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddressDto {
+public class SellerDto {
     Long id;
-    String latitude;
-    String longitude;
-    CityDto city;
-    String street;
-    String house;
-    String flat;
-    String level;
-    boolean elevator;
+    String name;
     UserDto user;
-
+    String inn;
+    String bik;
+    String description;
 }

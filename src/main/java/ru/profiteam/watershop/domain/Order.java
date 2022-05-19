@@ -22,8 +22,8 @@ public class Order extends PersistentObject {
     @Enumerated(EnumType.STRING)
     OrderStatusType orderStatusType;
 
-    @Column(name = "data")
-    String data;
+    @Column(name = "date")
+    String date;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -18,11 +18,11 @@ public class DeliveryServiceMassage extends PersistentObject {
 
     @ManyToOne
     @JoinColumn(name = "recipient_id")
-    User userRecipient;
+    User recipient;
 
     @ManyToOne
     @JoinColumn(name = "sender_id")
-    User userSender;
+    User sender;
 
     @Column(name = "context")
     String context;
@@ -31,6 +31,6 @@ public class DeliveryServiceMassage extends PersistentObject {
     @Enumerated(EnumType.STRING)
     MessageContextType messageContextType;
 
-    @Column(name = "data")
-    String data;
+    @Column(name = "date")
+    String date;
 }

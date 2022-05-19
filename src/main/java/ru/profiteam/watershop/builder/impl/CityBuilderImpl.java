@@ -4,6 +4,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.profiteam.watershop.builder.CityBuilder;
+import ru.profiteam.watershop.builder.CountryBuilder;
 import ru.profiteam.watershop.domain.City;
 import ru.profiteam.watershop.domain.Country;
 import ru.profiteam.watershop.dto.request.CreateCityDto;
@@ -15,16 +16,14 @@ import java.util.Date;
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CityBuilderImpl implements CityBuilder {
+    CountryBuilder countryBuilder;
 
     @Override
     public CityDto build(City city) {
         return CityDto.builder()
                 .id(city.getId())
                 .name(city.getName())
-                .country(CountryDto.builder()
-                        .id(city.getCountry().getId())
-                        .name(city.getCountry().getName())
-                        .build())
+                .country(countryBuilder.build(city.getCountry()))
                 .build();
     }
 

@@ -18,5 +18,6 @@ public class ProductDto {
     ProductContainerMaterialType productContainerMaterialType;
     int price;
     float volume;
+    SellerDto seller;
     ManufacturerDto manufacturer;
 }
