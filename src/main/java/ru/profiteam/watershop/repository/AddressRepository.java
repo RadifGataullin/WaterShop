@@ -6,5 +6,4 @@ import ru.profiteam.watershop.domain.Address;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
-
 }
