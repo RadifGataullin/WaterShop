@@ -44,8 +44,11 @@ public class ProductServiceImpl implements ProductService {
         if (manufacturerOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+
         Product product = productBuilder.build(request, manufacturerOpt.get());
         productRepository.save(product);
+
+
     }
 
     @Override

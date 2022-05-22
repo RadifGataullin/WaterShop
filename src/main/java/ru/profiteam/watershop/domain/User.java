@@ -17,6 +17,7 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends PersistentObject {
 
+
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     UserType type;
@@ -43,7 +44,4 @@ public class User extends PersistentObject {
     @ManyToOne
     @JoinColumn(name = "address_id")
     Address address;
-
-
-
 }
