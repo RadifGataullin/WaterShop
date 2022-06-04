@@ -11,8 +11,6 @@ import ru.profiteam.watershop.dto.request.CreateApproveCodeDto;
 import ru.profiteam.watershop.repository.ApproveCodeRepository;
 import ru.profiteam.watershop.service.ApproveCodeService;
 
-import java.util.Random;
-
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)

@@ -22,7 +22,7 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 public class AddressBuilderImpl implements AddressBuilder {
-    UserBuilder userBuilder;
+
     CityBuilder cityBuilder;
 
     @Override
@@ -37,7 +37,6 @@ public class AddressBuilderImpl implements AddressBuilder {
                 .flat(address.getFlat())
                 .level(address.getLevel())
                 .elevator(address.isElevator())
-                .user(userBuilder.build(address.getUser()))
                 .build();
     }
 

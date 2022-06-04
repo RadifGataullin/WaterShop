@@ -29,5 +29,6 @@ public class ApproveCodeBuilderImpl implements ApproveCodeBuilder {
         approveCode.setCode(number);
         approveCode.setNumber(request.getPhoneNumber());
 
+        return approveCode;
     }
 }

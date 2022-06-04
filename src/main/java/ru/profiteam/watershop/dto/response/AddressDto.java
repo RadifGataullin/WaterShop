@@ -19,6 +19,5 @@ public class AddressDto {
     String flat;
     String level;
     boolean elevator;
-    UserDto user;
 
 }

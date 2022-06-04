@@ -10,6 +10,6 @@ import java.util.stream.Stream;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    @Query("")
-    Stream<Address> findAllByUUID();
+//    @Query("")
+//    Stream<Address> findAllByUUID();
 }
