@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ru.profiteam.watershop.builder.ManufacterBuilder;
+import ru.profiteam.watershop.builder.ManufacturerBuilder;
 import ru.profiteam.watershop.domain.Manufacturer;
 import ru.profiteam.watershop.dto.request.CreateManufacturerDto;
 import ru.profiteam.watershop.dto.response.ManufacturerDto;
@@ -17,7 +17,7 @@ import java.util.Date;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
-public class ManufacterBuilderImpl implements ManufacterBuilder {
+public class ManufacturerBuilderImpl implements ManufacturerBuilder {
 
     @Override
     public ManufacturerDto build(Manufacturer manufacturer) {

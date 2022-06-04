@@ -10,4 +10,5 @@ import org.springframework.stereotype.Service;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class DeliveryServiceImpl {
+
 }

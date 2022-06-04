@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import ru.profiteam.watershop.builder.ManufacterBuilder;
+import ru.profiteam.watershop.builder.ManufacturerBuilder;
 import ru.profiteam.watershop.domain.Manufacturer;
 import ru.profiteam.watershop.dto.request.CreateManufacturerDto;
 import ru.profiteam.watershop.dto.response.ManufacturerDto;
@@ -22,18 +22,18 @@ import java.util.*;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ManufacturerServiceImpl implements ManufacturerService {
     ManufacturerRepository manufacturerRepository;
-    ManufacterBuilder manufacterBuilder;
+    ManufacturerBuilder manufacturerBuilder;
 
     @Autowired
     public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository,
-                                   ManufacterBuilder manufacterBuilder) {
+                                   ManufacturerBuilder manufacturerBuilder) {
         this.manufacturerRepository = manufacturerRepository;
-        this.manufacterBuilder = manufacterBuilder;
+        this.manufacturerBuilder = manufacturerBuilder;
     }
 
     @Override
     public void create(CreateManufacturerDto request){
-        Manufacturer manufacturer = manufacterBuilder.build(request);
+        Manufacturer manufacturer = manufacturerBuilder.build(request);
         manufacturerRepository.save(manufacturer);
     }
 
@@ -42,7 +42,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         List<Manufacturer> manufacturerList = manufacturerRepository.findAll();
         List<ManufacturerDto> manufacturerDtoList = new ArrayList<>();
         for(Manufacturer item: manufacturerList){
-            manufacturerDtoList.add(manufacterBuilder.build(item));
+            manufacturerDtoList.add(manufacturerBuilder.build(item));
         }
         return manufacturerDtoList;
     }
@@ -53,7 +53,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         if (manufacturerOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        return manufacterBuilder.build(manufacturerOpt.get());
+        return manufacturerBuilder.build(manufacturerOpt.get());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         Manufacturer updateManufacturer = manufacturerOpt.get();
-        manufacterBuilder.update(updateManufacturer, request);
+        manufacturerBuilder.update(updateManufacturer, request);
         manufacturerRepository.save(updateManufacturer);
     }
 

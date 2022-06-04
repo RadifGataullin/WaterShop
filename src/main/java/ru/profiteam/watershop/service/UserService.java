@@ -11,6 +11,6 @@ public interface UserService {
                          String email,
                          int phoneNumber);
     boolean verify(long userId, long code);
-    Long createActivationCode(Long userId); //?????????
+    Long createActivationCode(Long userId); //??????????
 
 }

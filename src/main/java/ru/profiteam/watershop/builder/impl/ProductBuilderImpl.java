@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ru.profiteam.watershop.builder.ManufacterBuilder;
+import ru.profiteam.watershop.builder.ManufacturerBuilder;
 import ru.profiteam.watershop.builder.ProductBuilder;
 import ru.profiteam.watershop.builder.SellerBuilder;
 import ru.profiteam.watershop.domain.Manufacturer;
@@ -23,7 +23,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class ProductBuilderImpl implements ProductBuilder {
 
-    ManufacterBuilder manufacterBuilder;
+    ManufacturerBuilder manufacterBuilder;
     SellerBuilder sellerBuilder;
 
     @Override

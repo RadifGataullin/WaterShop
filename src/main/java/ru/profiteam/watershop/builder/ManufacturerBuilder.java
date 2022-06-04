@@ -4,7 +4,7 @@ import ru.profiteam.watershop.domain.Manufacturer;
 import ru.profiteam.watershop.dto.request.CreateManufacturerDto;
 import ru.profiteam.watershop.dto.response.ManufacturerDto;
 
-public interface ManufacterBuilder {
+public interface ManufacturerBuilder {
 
     ManufacturerDto build(Manufacturer manufacturer);
 

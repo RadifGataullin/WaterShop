@@ -2,6 +2,7 @@ package ru.profiteam.watershop.service.impl;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import ru.profiteam.watershop.repository.CountryRepository;
 import ru.profiteam.watershop.service.CityService;
 
 import java.util.*;
+
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -25,6 +27,7 @@ public class CityServiceImpl implements CityService {
     CityBuilder cityBuilder;
     CountryRepository countryRepository;
 
+    @Autowired
     public CityServiceImpl(CityRepository cityRepository,
                            CityBuilder cityBuilder,
                            CountryRepository countryRepository) {

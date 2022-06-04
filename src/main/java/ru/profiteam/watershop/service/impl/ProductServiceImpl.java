@@ -33,9 +33,11 @@ public class ProductServiceImpl implements ProductService {
     ProductBuilder productBuilder;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository,
+    public ProductServiceImpl(
+                              ProductRepository productRepository,
                               ManufacturerRepository manufacturerRepository,
-                              SellerRepository sellerRepository, ProductBuilder productBuilder) {
+                              SellerRepository sellerRepository,
+                              ProductBuilder productBuilder) {
         this.productRepository = productRepository;
         this.manufacturerRepository = manufacturerRepository;
         this.sellerRepository = sellerRepository;
