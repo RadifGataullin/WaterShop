@@ -53,6 +53,7 @@ public class ProductBuilderImpl implements ProductBuilder {
         product.setCreatedAt(new Date());
 
         product.setManufacturer(manufacturer);
+        product.setSeller(seller);
         return product;
     }
 

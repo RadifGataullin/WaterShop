@@ -1,9 +1,6 @@
 package ru.profiteam.watershop.dto.request;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.enums.UserType;
 import ru.profiteam.watershop.dto.response.AddressDto;
