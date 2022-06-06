@@ -23,12 +23,25 @@ public class ApproveCodeBuilderImpl implements ApproveCodeBuilder {
     public ApproveCode build(CreateApproveCodeDto request ) {
         Random randomCode = new Random();
         int number = randomCode.nextInt(999999);
-
         ApproveCode approveCode = new ApproveCode();
-
         approveCode.setCode(number);
         approveCode.setNumber(request.getPhoneNumber());
 
         return approveCode;
+    }
+
+    @Override
+    public ApproveCode build(ApproveCodeDto request) {
+        return null;
+    }
+
+    @Override
+    public ApproveCodeDto build(ApproveCode approveCode) {
+        return null;
+    }
+
+    @Override
+    public void update(ApproveCode approveCode, ApproveCodeDto request) {
+
     }
 }

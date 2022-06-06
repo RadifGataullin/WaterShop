@@ -7,4 +7,6 @@ import ru.profiteam.watershop.domain.ApproveCode;
 public interface ApproveCodeRepository extends JpaRepository <ApproveCode,Long> {
 
 
-}
+
+    }
+

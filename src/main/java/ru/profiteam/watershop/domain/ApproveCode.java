@@ -18,7 +18,7 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ApproveCode  extends PersistentObject {
 
-    @Column(name = "number")
+    @Column(name = "phoneNumber")
     String number;
 
     @Column(name = "code")

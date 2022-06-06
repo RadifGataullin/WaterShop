@@ -7,20 +7,27 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import ru.profiteam.watershop.builder.ApproveCodeBuilder;
+import ru.profiteam.watershop.domain.ApproveCode;
+import ru.profiteam.watershop.domain.Country;
 import ru.profiteam.watershop.dto.request.CreateApproveCodeDto;
+import ru.profiteam.watershop.dto.response.ApproveCodeDto;
+import ru.profiteam.watershop.dto.response.CountryDto;
 import ru.profiteam.watershop.repository.ApproveCodeRepository;
 import ru.profiteam.watershop.service.ApproveCodeService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ApproveServiceImpl implements ApproveCodeService {
+public class ApproveCodeServiceImpl implements ApproveCodeService {
 
     ApproveCodeRepository approveCodeRepository;
     ApproveCodeBuilder approveCodeBuilder;
 
     @Autowired
-    public ApproveServiceImpl(
+    public ApproveCodeServiceImpl(
 
             ApproveCodeRepository approveCodeRepository,
             ApproveCodeBuilder approveCodeBuilder) {
@@ -29,9 +36,21 @@ public class ApproveServiceImpl implements ApproveCodeService {
     }
 
     @Override
-    public String create(CreateApproveCodeDto request) {
+    public void create(CreateApproveCodeDto request) {
+        ApproveCode approveCode = approveCodeBuilder.build(request);
+        approveCodeRepository.save(approveCode);
 
-        return null;
+    }
+
+    @Override
+    public List<ApproveCodeDto> getAll() {
+        List<ApproveCode> approveCodeList = approveCodeRepository.findAll();
+        List<ApproveCodeDto> approveCodeDtoList = new ArrayList<>();
+        for (ApproveCode item : approveCodeList) {
+            approveCodeDtoList.add(approveCodeBuilder.build(item));
+        }
+        return approveCodeDtoList;
+
     }
 }
 
