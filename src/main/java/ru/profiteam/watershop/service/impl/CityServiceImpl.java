@@ -40,7 +40,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public void create(CreateCityDto request) {
         Optional<Country> countryOpt = countryRepository.findById(request.getCountryId());
-        if (countryOpt.isEmpty()){
+        if (countryOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         City city = cityBuilder.build(request, countryOpt.get());
@@ -51,7 +51,7 @@ public class CityServiceImpl implements CityService {
     public List<CityDto> getAll() {
         List<City> cityList = cityRepository.findAll();
         List<CityDto> cityDtoList = new ArrayList<>();
-        for(City item : cityList){
+        for (City item : cityList) {
             cityDtoList.add(cityBuilder.build(item));
         }
         return cityDtoList;

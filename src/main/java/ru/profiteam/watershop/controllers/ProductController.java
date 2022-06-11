@@ -39,18 +39,10 @@ public class ProductController {
         return productService.getAll();
     }
 
-    @GetMapping("get-by-id")
-    ProductDto getById(Long id){
-        return productService.getById(id);
-    }
-
     @PutMapping("update")
     void update(Long id, @RequestBody CreateProductDto request){
         productService.update(id, request);
     }
 
-    @DeleteMapping("delete-by-id")
-    void deleteById(Long id){
-        productService.deleteById(id);
-    }
+
 }

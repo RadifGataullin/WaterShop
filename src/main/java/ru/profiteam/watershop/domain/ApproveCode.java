@@ -22,9 +22,8 @@ public class ApproveCode  extends PersistentObject {
     String number;
 
     @Column(name = "code")
-    int code;
+    String code;
 
     @Column( name = "is_activated")
-    boolean isActivated;
-
+    Boolean isActivated;
 }

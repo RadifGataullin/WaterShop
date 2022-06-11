@@ -5,7 +5,9 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ru.profiteam.watershop.builder.ApproveCodeBuilder;
 import ru.profiteam.watershop.domain.ApproveCode;
 import ru.profiteam.watershop.domain.Country;
@@ -17,6 +19,8 @@ import ru.profiteam.watershop.service.ApproveCodeService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -28,7 +32,6 @@ public class ApproveCodeServiceImpl implements ApproveCodeService {
 
     @Autowired
     public ApproveCodeServiceImpl(
-
             ApproveCodeRepository approveCodeRepository,
             ApproveCodeBuilder approveCodeBuilder) {
         this.approveCodeRepository = approveCodeRepository;
@@ -50,8 +53,31 @@ public class ApproveCodeServiceImpl implements ApproveCodeService {
             approveCodeDtoList.add(approveCodeBuilder.build(item));
         }
         return approveCodeDtoList;
+    }
+
+    @Override
+    public void update(Long id, CreateApproveCodeDto request) {
 
     }
+
+    @Override
+    public void approve(ApproveCodeDto request) {
+//        var approveCode = approveCodeRepository
+//                .findAll()
+//                .stream()
+//                .filter(x -> x.getNumber().equals(request.getNumber()) && x.getCode().equals(request.getCode()))
+//                .collect(Collectors.toList());
+//        if (!approveCode.isEmpty());
+
+        Optional<ApproveCode> approveCodeOpt = approveCodeRepository
+                .findByNumberAndCode(request.getNumber(), request.getCode());
+
+        if (approveCodeOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        ApproveCode approveCode = approveCodeOpt.get();
+        approveCode.setIsActivated(true);
+        approveCodeRepository.save(approveCode);
+    }
 }
-
-

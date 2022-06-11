@@ -23,7 +23,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class ProductBuilderImpl implements ProductBuilder {
 
-    ManufacturerBuilder manufacterBuilder;
+    ManufacturerBuilder manufacturerBuilder;
     SellerBuilder sellerBuilder;
 
     @Override
@@ -36,7 +36,7 @@ public class ProductBuilderImpl implements ProductBuilder {
                 .price(product.getPrice())
                 .volume(product.getVolume())
                 .seller(sellerBuilder.build(product.getSeller()))
-                .manufacturer(manufacterBuilder.build(product.getManufacturer()))
+                .manufacturer(manufacturerBuilder.build(product.getManufacturer()))
                 .build();
     }
 

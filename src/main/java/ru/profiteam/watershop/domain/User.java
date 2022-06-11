@@ -43,8 +43,4 @@ public class User extends PersistentObject {
     @ManyToOne
     @JoinColumn(name = "address_id")
     Address address;
-
-
-
-
 }
