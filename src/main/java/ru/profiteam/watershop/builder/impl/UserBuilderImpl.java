@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 import ru.profiteam.watershop.builder.AddressBuilder;
 import ru.profiteam.watershop.builder.CityBuilder;
 import ru.profiteam.watershop.builder.UserBuilder;
@@ -75,7 +76,7 @@ public class UserBuilderImpl implements UserBuilder {
     @Override
     public User regBuild(RegistrationDto request) {
         User user = new User();
-        user.setPassword(request.getPassword());
+        user.setPassword(DigestUtils.md5DigestAsHex(request.getPassword().getBytes()));
         user.setLogin(request.getLogin());
         user.setCreatedAt(new Date());
         return user;
