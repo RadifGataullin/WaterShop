@@ -1,8 +1,6 @@
 package ru.profiteam.watershop.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
 import ru.profiteam.watershop.domain.enums.UserType;
@@ -13,8 +11,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
 public class User extends PersistentObject {
 
     @Column(name = "type")
@@ -34,7 +35,7 @@ public class User extends PersistentObject {
     String email;
 
     @Column(name = "phone_number")
-    int phoneNumber;
+    String phoneNumber;
 
     @ManyToOne
     @JoinColumn(name = "city_id")

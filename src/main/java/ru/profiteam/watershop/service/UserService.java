@@ -1,6 +1,7 @@
 package ru.profiteam.watershop.service;
 
 import ru.profiteam.watershop.domain.User;
+import ru.profiteam.watershop.dto.request.RegistrationDto;
 import ru.profiteam.watershop.dto.response.SessionDto;
 import ru.profiteam.watershop.dto.response.UserDto;
 
@@ -13,4 +14,7 @@ public interface UserService {
     boolean verify(long userId, long code);
     Long createActivationCode(Long userId); //??????????
 
-}
+    void create  (RegistrationDto user);
+    }
+
+

@@ -17,7 +17,7 @@ public class UserDto {
     String login;
     String password;
     String email;
-    int phoneNumber;
+    String phoneNumber;
     CityDto city;
     AddressDto address;
 }
