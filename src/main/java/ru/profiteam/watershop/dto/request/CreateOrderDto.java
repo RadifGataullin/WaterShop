@@ -15,7 +15,6 @@ import ru.profiteam.watershop.dto.response.UserDto;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateOrderDto {
     OrderStatusType orderStatusType;
-    String data;
     Long userId;
     int productCount;
     double totalPrice;
