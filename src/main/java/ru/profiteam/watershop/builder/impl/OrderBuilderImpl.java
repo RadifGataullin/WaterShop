@@ -28,7 +28,6 @@ public class OrderBuilderImpl implements OrderBuilder {
         return OrderDto.builder()
                 .id(order.getId())
                 .orderStatusType(order.getOrderStatusType())
-                .data(order.getDate())
                 .user(userBuilder.build(order.getUser()))
                 .productCount(order.getProductCount())
                 .totalPrice(order.getTotalPrice())
@@ -40,7 +39,6 @@ public class OrderBuilderImpl implements OrderBuilder {
     public Order build(CreateOrderDto request, User user) {
         Order order = new Order();
         order.setOrderStatusType(request.getOrderStatusType());
-        order.setDate(request.getData());
         order.setUser(user);
         order.setProductCount(request.getProductCount());
         order.setTotalPrice(request.getTotalPrice());
@@ -54,7 +52,6 @@ public class OrderBuilderImpl implements OrderBuilder {
                        CreateOrderDto request,
                        User user) {
         order.setOrderStatusType(request.getOrderStatusType());
-        order.setDate(request.getData());
         order.setUser(user);
         order.setProductCount(request.getProductCount());
         order.setTotalPrice(request.getTotalPrice());
