@@ -12,5 +12,9 @@ import java.util.stream.Stream;
 public interface ApproveCodeRepository extends JpaRepository<ApproveCode, Long> {
 
     Optional<ApproveCode> findByNumberAndCode(String number, String code);
+
+    Optional<ApproveCode> findFirstByNumberAndIsActivatedTrue(String number);
+
+
 }
 
