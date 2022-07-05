@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import ru.profiteam.watershop.dto.request.CreateCountryDto;
 import ru.profiteam.watershop.dto.response.CountryDto;
 import ru.profiteam.watershop.service.CountryService;

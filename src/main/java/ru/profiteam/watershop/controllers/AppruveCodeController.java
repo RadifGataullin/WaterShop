@@ -1,6 +1,5 @@
 package ru.profiteam.watershop.controllers;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+
 import ru.profiteam.watershop.dto.request.CreateApproveCodeDto;
 import ru.profiteam.watershop.dto.response.ApproveCodeDto;
 import ru.profiteam.watershop.service.ApproveCodeService;
