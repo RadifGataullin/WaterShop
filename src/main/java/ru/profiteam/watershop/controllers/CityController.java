@@ -15,7 +15,6 @@ import ru.profiteam.watershop.dto.request.CreateCityDto;
 import ru.profiteam.watershop.dto.response.CityDto;
 import ru.profiteam.watershop.service.CityService;
 import ru.profiteam.watershop.utils.ErrorSwaggerModel;
-
 import java.util.List;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

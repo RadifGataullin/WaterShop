@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
-
 import ru.profiteam.watershop.dto.request.CreateApproveCodeDto;
 import ru.profiteam.watershop.dto.response.ApproveCodeDto;
 import ru.profiteam.watershop.service.ApproveCodeService;

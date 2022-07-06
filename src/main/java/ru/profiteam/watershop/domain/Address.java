@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
-
 import javax.persistence.*;
-import java.util.List;
 
 //адрес клиента
 @Getter
