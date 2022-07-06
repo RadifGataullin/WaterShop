@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateCountryDto {
-    String name;
-
+public class RegistrationDto {
+    String login;
+    String password;
 }

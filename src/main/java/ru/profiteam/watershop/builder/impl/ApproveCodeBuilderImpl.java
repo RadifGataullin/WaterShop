@@ -10,8 +10,8 @@ import ru.profiteam.watershop.builder.ApproveCodeBuilder;
 import ru.profiteam.watershop.domain.ApproveCode;
 import ru.profiteam.watershop.dto.request.CreateApproveCodeDto;
 import ru.profiteam.watershop.dto.response.ApproveCodeDto;
-
-import java.util.Random;
+import ru.profiteam.watershop.utils.GeneratorHelper;
+import java.util.Date;
 
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -21,14 +21,27 @@ public class ApproveCodeBuilderImpl implements ApproveCodeBuilder {
 
     @Override
     public ApproveCode build(CreateApproveCodeDto request ) {
-        Random randomCode = new Random();
-        int number = randomCode.nextInt(999999);
-
         ApproveCode approveCode = new ApproveCode();
-
-        approveCode.setCode(number);
+        approveCode.setCode(GeneratorHelper.code());
         approveCode.setNumber(request.getPhoneNumber());
-
+        approveCode.setCreatedAt(new Date());
+        approveCode.setIsActivated(false);
         return approveCode;
+    }
+
+
+    @Override
+    public ApproveCode build(ApproveCodeDto request) {
+        return null;
+    }
+
+    @Override
+    public ApproveCodeDto build(ApproveCode approveCode) {
+        return null;
+    }
+
+    @Override
+    public void update(ApproveCode approveCode, ApproveCodeDto request) {
+
     }
 }

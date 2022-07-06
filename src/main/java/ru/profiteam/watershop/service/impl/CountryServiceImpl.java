@@ -23,6 +23,7 @@ import java.util.*;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CountryServiceImpl implements CountryService {
+
     CountryRepository countryRepository;
     CountryBuilder countryBuilder;
 

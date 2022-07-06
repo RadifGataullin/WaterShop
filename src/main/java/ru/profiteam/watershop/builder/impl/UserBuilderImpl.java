@@ -6,13 +6,17 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 import ru.profiteam.watershop.builder.AddressBuilder;
 import ru.profiteam.watershop.builder.CityBuilder;
 import ru.profiteam.watershop.builder.UserBuilder;
 import ru.profiteam.watershop.domain.Address;
+import ru.profiteam.watershop.domain.ApproveCode;
 import ru.profiteam.watershop.domain.City;
 import ru.profiteam.watershop.domain.User;
 import ru.profiteam.watershop.dto.request.CreateUserDto;
+import ru.profiteam.watershop.dto.request.RegistrationDto;
+import ru.profiteam.watershop.dto.response.ApproveCodeDto;
 import ru.profiteam.watershop.dto.response.UserDto;
 
 import java.util.Date;
@@ -67,5 +71,14 @@ public class UserBuilderImpl implements UserBuilder {
         user.setCity(city);
         user.setAddress(address);
         user.setUpdatedAt(new Date());
+    }
+
+    @Override
+    public User regBuild(RegistrationDto request) {
+        User user = new User();
+        user.setPassword(DigestUtils.md5DigestAsHex(request.getPassword().getBytes()));
+        user.setLogin(request.getLogin());
+        user.setCreatedAt(new Date());
+        return user;
     }
 }

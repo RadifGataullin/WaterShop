@@ -23,4 +23,7 @@ public class Manufacturer extends PersistentObject {
 
     @Column(name = "logo")
     String logo;
+
+    @Column(name ="sum")
+    String sum;
 }

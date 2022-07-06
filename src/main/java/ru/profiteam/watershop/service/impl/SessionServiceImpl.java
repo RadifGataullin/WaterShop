@@ -3,6 +3,7 @@ package ru.profiteam.watershop.service.impl;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.SessionBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,12 @@ public class SessionServiceImpl {
     SessionRepository sessionRepository;
     SessionBuilder sessionBuilder;
 
-
+    @Autowired
     public SessionServiceImpl(
             SessionRepository sessionRepository,
             SessionBuilder sessionBuilder) {
         this.sessionRepository = sessionRepository;
         this.sessionBuilder = sessionBuilder;
     }
+
 }
