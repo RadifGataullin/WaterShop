@@ -9,14 +9,16 @@ import ru.profiteam.watershop.domain.enums.OrderStatusType;
 import ru.profiteam.watershop.domain.enums.PayMethodType;
 import ru.profiteam.watershop.dto.response.UserDto;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateOrderDto {
-    OrderStatusType orderStatusType;
-    Long userId;
-    int productCount;
-    double totalPrice;
+    String name;
+    String address;
+    String phoneNumber;
     PayMethodType payMethodType;
+    List<SelectProductDto> products;
 }

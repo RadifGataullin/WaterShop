@@ -17,9 +17,8 @@ public class SessionServiceImpl {
 
 
     public SessionServiceImpl(
-                                SessionRepository sessionRepository,
-                                SessionBuilder sessionBuilder)
-    {
+            SessionRepository sessionRepository,
+            SessionBuilder sessionBuilder) {
         this.sessionRepository = sessionRepository;
         this.sessionBuilder = sessionBuilder;
     }

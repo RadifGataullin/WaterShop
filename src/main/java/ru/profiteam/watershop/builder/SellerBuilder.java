@@ -9,7 +9,7 @@ public interface SellerBuilder {
 
     SellerDto build(Seller seller);
 
-    Seller build(CreateSellerDto request, User user);
+    Seller build(CreateSellerDto request);
 
-    void update(Seller seller, CreateSellerDto request, User user);
+    void update(Seller seller, CreateSellerDto request);
 }

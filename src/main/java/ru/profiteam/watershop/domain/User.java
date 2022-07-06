@@ -8,6 +8,7 @@ import ru.profiteam.watershop.domain.base.PersistentObject;
 import ru.profiteam.watershop.domain.enums.UserType;
 
 import javax.persistence.*;
+import java.util.List;
 //слиент
 
 @Getter
@@ -43,8 +44,5 @@ public class User extends PersistentObject {
     @ManyToOne
     @JoinColumn(name = "address_id")
     Address address;
-
-
-
 
 }

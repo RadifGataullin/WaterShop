@@ -43,7 +43,6 @@ public class Product extends PersistentObject {
     @JoinColumn(name = "manufacturer_id")
     Manufacturer manufacturer;
 
-
     @OneToMany(mappedBy = "product")
     List<ProductToOrder> productToOrders;
 }

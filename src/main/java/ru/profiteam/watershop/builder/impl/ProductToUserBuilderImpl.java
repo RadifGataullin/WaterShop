@@ -32,20 +32,16 @@ public class ProductToUserBuilderImpl implements ProductToOrderBuilder {
                 .id(productToOrder.getId())
                 .product(productBuilder.build(productToOrder.getProduct()))
                 .order(orderBuilder.build(productToOrder.getOrder()))
-                .price(productToOrder.getPrice())
                 .count(productToOrder.getCount())
                 .build();
     }
 
     @Override
-    public ProductToOrder build(CreateProductToOrderDto request,
-                                Product product,
-                                Order order) {
+    public ProductToOrder build(Product product, Order order, int count) {
         ProductToOrder productToOrder = new ProductToOrder();
         productToOrder.setProduct(product);
         productToOrder.setOrder(order);
-        productToOrder.setPrice(request.getPrice());
-        productToOrder.setCount(request.getCount());
+        productToOrder.setCount(count);
         productToOrder.setCreatedAt(new Date());
         return productToOrder;
     }
@@ -57,7 +53,6 @@ public class ProductToUserBuilderImpl implements ProductToOrderBuilder {
                        Order order) {
         productToOrder.setProduct(product);
         productToOrder.setOrder(order);
-        productToOrder.setPrice(request.getPrice());
         productToOrder.setCount(request.getCount());
         productToOrder.setUpdatedAt(new Date());
 

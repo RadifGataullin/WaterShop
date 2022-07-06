@@ -15,7 +15,6 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductToOrder extends PersistentObject {
 
-
     @ManyToOne
     @JoinColumn(name = "product_id")
     Product product;
@@ -23,9 +22,6 @@ public class ProductToOrder extends PersistentObject {
     @ManyToOne
     @JoinColumn(name = "order_id")
     Order order;
-
-    @Column(name = "price")
-    double price;
 
     @Column(name = "count")
     int count;

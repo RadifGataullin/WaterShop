@@ -7,8 +7,10 @@ import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
 import ru.profiteam.watershop.domain.enums.OrderStatusType;
 import ru.profiteam.watershop.domain.enums.PayMethodType;
+import ru.profiteam.watershop.dto.request.SelectProductDto;
 
 import javax.persistence.*;
+import java.util.List;
 
 //заказы
 @Getter
@@ -18,22 +20,20 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Order extends PersistentObject {
 
-    @Column(name = "order_status_type")
-    @Enumerated(EnumType.STRING)
-    OrderStatusType orderStatusType;
+    @Column(name = "name")
+    String name;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    User user;
+    @Column(name = "address")
+    String address;
 
-    @Column(name = "product_count")
-    int productCount;
-
-    @Column(name = "total_price")
-    double totalPrice;
+    @Column(name = "phoneNumber")
+    String phoneNumber;
 
     @Column(name = "context_type")
     @Enumerated(EnumType.STRING)
     PayMethodType payMethodType;
+
+    @OneToMany(mappedBy = "product")
+    List<ProductToOrder> productsToOrders;
 
 }

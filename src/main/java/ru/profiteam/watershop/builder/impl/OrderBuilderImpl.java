@@ -27,21 +27,19 @@ public class OrderBuilderImpl implements OrderBuilder {
     public OrderDto build(Order order) {
         return OrderDto.builder()
                 .id(order.getId())
-                .orderStatusType(order.getOrderStatusType())
-                .user(userBuilder.build(order.getUser()))
-                .productCount(order.getProductCount())
-                .totalPrice(order.getTotalPrice())
+                .name(order.getName())
+                .address(order.getAddress())
+                .phoneNumber(order.getPhoneNumber())
                 .payMethodType(order.getPayMethodType())
                 .build();
     }
 
     @Override
-    public Order build(CreateOrderDto request, User user) {
+    public Order build(CreateOrderDto request) {
         Order order = new Order();
-        order.setOrderStatusType(request.getOrderStatusType());
-        order.setUser(user);
-        order.setProductCount(request.getProductCount());
-        order.setTotalPrice(request.getTotalPrice());
+        order.setName(request.getName());
+        order.setAddress(request.getAddress());
+        order.setPhoneNumber(request.getPhoneNumber());
         order.setPayMethodType(request.getPayMethodType());
         order.setCreatedAt(new Date());
         return order;
@@ -49,12 +47,10 @@ public class OrderBuilderImpl implements OrderBuilder {
 
     @Override
     public void update(Order order,
-                       CreateOrderDto request,
-                       User user) {
-        order.setOrderStatusType(request.getOrderStatusType());
-        order.setUser(user);
-        order.setProductCount(request.getProductCount());
-        order.setTotalPrice(request.getTotalPrice());
+                       CreateOrderDto request) {
+        order.setName(request.getName());
+        order.setAddress(request.getAddress());
+        order.setPhoneNumber(request.getPhoneNumber());
         order.setPayMethodType(request.getPayMethodType());
         order.setUpdatedAt(new Date());
     }

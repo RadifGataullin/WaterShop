@@ -8,9 +8,8 @@ public interface ProductToOrderBuilder {
 
     ProductToOrderDto build(ProductToOrder productToOrder);
 
-    ProductToOrder build(CreateProductToOrderDto request,
-                         Product product,
-                         Order order);
+    ProductToOrder build(Product product, Order order, int count);
+
     void update(ProductToOrder productToOrder,
                 CreateProductToOrderDto request,
                 Product product,

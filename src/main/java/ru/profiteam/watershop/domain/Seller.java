@@ -19,10 +19,6 @@ public class Seller extends PersistentObject {
     @Column(name = "name")
     String name;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    User user;
-
     @Column(name = "inn")
     String inn;
 

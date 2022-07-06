@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class SellerDto {
     Long id;
     String name;
-    UserDto user;
+//    UserDto user;
     String inn;
     String bik;
     String description;

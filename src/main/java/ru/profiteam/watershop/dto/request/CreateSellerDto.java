@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateSellerDto {
     String name;
-    Long userId;
     String inn;
     String bik;
     String description;
