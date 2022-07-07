@@ -27,6 +27,7 @@ public class OrderBuilderImpl implements OrderBuilder {
     public OrderDto build(Order order) {
         return OrderDto.builder()
                 .id(order.getId())
+                .user(userBuilder.build(order.getUser()))
                 .name(order.getName())
                 .address(order.getAddress())
                 .phoneNumber(order.getPhoneNumber())
@@ -35,8 +36,10 @@ public class OrderBuilderImpl implements OrderBuilder {
     }
 
     @Override
-    public Order build(CreateOrderDto request) {
+    public Order build(CreateOrderDto request,
+                       User user) {
         Order order = new Order();
+        order.setUser(user);
         order.setName(request.getName());
         order.setAddress(request.getAddress());
         order.setPhoneNumber(request.getPhoneNumber());
@@ -47,7 +50,9 @@ public class OrderBuilderImpl implements OrderBuilder {
 
     @Override
     public void update(Order order,
-                       CreateOrderDto request) {
+                       CreateOrderDto request,
+                       User user) {
+        order.setUser(user);
         order.setName(request.getName());
         order.setAddress(request.getAddress());
         order.setPhoneNumber(request.getPhoneNumber());

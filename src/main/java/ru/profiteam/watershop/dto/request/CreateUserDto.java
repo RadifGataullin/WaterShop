@@ -15,8 +15,8 @@ public class CreateUserDto {
     String fullName;
     String login;
     String password;
-    String email;
+//    String email;
     String phoneNumber;
-    Long cityId;
-    Long addressId;
+//    Long cityId;
+//    Long addressId;
 }

@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateOrderDto {
+    Long userId;
     String name;
     String address;
     String phoneNumber;

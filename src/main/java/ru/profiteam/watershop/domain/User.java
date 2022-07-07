@@ -32,19 +32,19 @@ public class User extends PersistentObject {
     @Column(name = "password")
     String password;
 
-    @Column(name = "email")
-    String email;
+//    @Column(name = "email")
+//    String email;
 
     @Column(name = "phone_number")
     String phoneNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    City city;
+//    @ManyToOne
+//    @JoinColumn(name = "city_id")
+//    City city;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id")
-    Address address;
+//    @ManyToOne
+//    @JoinColumn(name = "address_id")
+//    Address address;
 
 
 

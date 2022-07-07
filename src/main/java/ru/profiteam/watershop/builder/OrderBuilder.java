@@ -8,8 +8,7 @@ public interface OrderBuilder {
 
     OrderDto build(Order order);
 
-    Order build(CreateOrderDto request);
+    Order build(CreateOrderDto request, User user);
 
-    void update(Order order,
-                CreateOrderDto request);
+    void update(Order order, CreateOrderDto request, User user);
 }

@@ -36,4 +36,8 @@ public class Order extends PersistentObject {
     @OneToMany(mappedBy = "product")
     List<ProductToOrder> productsToOrders;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
 }

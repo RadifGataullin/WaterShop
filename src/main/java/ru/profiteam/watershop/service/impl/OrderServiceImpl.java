@@ -13,14 +13,18 @@ import ru.profiteam.watershop.builder.ProductToOrderBuilder;
 import ru.profiteam.watershop.domain.Order;
 import ru.profiteam.watershop.domain.Product;
 import ru.profiteam.watershop.domain.ProductToOrder;
+import ru.profiteam.watershop.domain.User;
 import ru.profiteam.watershop.dto.request.CreateOrderDto;
 import ru.profiteam.watershop.dto.request.SelectProductDto;
-import ru.profiteam.watershop.dto.response.ProductToOrderDto;
+import ru.profiteam.watershop.dto.response.OrderDto;
 import ru.profiteam.watershop.repository.OrderRepository;
 import ru.profiteam.watershop.repository.ProductRepository;
 import ru.profiteam.watershop.repository.ProductToOrderRepository;
+import ru.profiteam.watershop.repository.UserRepository;
 import ru.profiteam.watershop.service.OrderService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,10 +38,16 @@ public class OrderServiceImpl implements OrderService {
     OrderBuilder orderBuilder;
     ProductToOrderBuilder productToOrderBuilder;
     ProductToOrderRepository productToOrderRepository;
+    UserRepository userRepository;
 
     @Override
     public void create(CreateOrderDto request) {
-        Order order = orderBuilder.build(request);
+        Optional<User> userOpt = userRepository.findById(request.getUserId());
+        if(userOpt.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        Order order = orderBuilder.build(request, userOpt.get());
         orderRepository.save(order);
 
         for (SelectProductDto selectProductDto : request.getProducts()) {
@@ -48,8 +58,30 @@ public class OrderServiceImpl implements OrderService {
             ProductToOrder productToOrder = productToOrderBuilder.build(productOpt.get(), order, selectProductDto.getCount());
             productToOrderRepository.save(productToOrder);
         }
-
     }
 
+    @Override
+    public List<OrderDto> getAll() {
+        List<Order> orderList = orderRepository.findAll();
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        for(Order item : orderList){
+            orderDtoList.add(orderBuilder.build(item));
+        }
+        return orderDtoList;
+    }
 
+    @Override
+    public List<OrderDto> getByUserId(Long id) {
+        Optional<User> userOpt = userRepository.findById(id);
+        if (userOpt.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        List<Order> orderList = orderRepository.findAll();
+        List<OrderDto> orderDtoList = new ArrayList<>();
+        for(Order item : orderList){
+            if (id.equals(item.getUser().getId()))
+            orderDtoList.add(orderBuilder.build(item));
+        }
+        return orderDtoList;
+    }
 }

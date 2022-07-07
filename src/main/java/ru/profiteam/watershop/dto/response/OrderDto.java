@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDto {
     Long id;
+    UserDto user;
     String name;
     String address;
     String phoneNumber;

@@ -16,8 +16,8 @@ public class UserDto {
     String fullName;
     String login;
     String password;
-    String email;
+//    String email;
     String phoneNumber;
-    CityDto city;
-    AddressDto address;
+//    CityDto city;
+//    AddressDto address;
 }

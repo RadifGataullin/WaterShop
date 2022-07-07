@@ -27,8 +27,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class UserBuilderImpl implements UserBuilder {
 
-    CityBuilder cityBuilder;
-    AddressBuilder addressBuilder;
+//    CityBuilder cityBuilder;
+//    AddressBuilder addressBuilder;
 
     @Override
     public UserDto build(User user) {
@@ -38,10 +38,10 @@ public class UserBuilderImpl implements UserBuilder {
                 .fullName(user.getFullName())
                 .login(user.getLogin())
                 .password(user.getPassword())
-                .email(user.getEmail())
+//                .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
-                .city(cityBuilder.build(user.getCity()))
-                .address(addressBuilder.build(user.getAddress()))
+//                .city(cityBuilder.build(user.getCity()))
+//                .address(addressBuilder.build(user.getAddress()))
                 .build();
     }
 
@@ -52,10 +52,10 @@ public class UserBuilderImpl implements UserBuilder {
         user.setFullName(request.getFullName());
         user.setLogin(request.getLogin());
         user.setPassword(request.getPassword());
-        user.setEmail(request.getEmail());
+//        user.setEmail(request.getEmail());
         user.setPhoneNumber(request.getPhoneNumber());
-        user.setCity(city);
-        user.setAddress(address);
+//        user.setCity(city);
+//        user.setAddress(address);
         user.setCreatedAt(new Date());
         return user;
     }
@@ -66,10 +66,10 @@ public class UserBuilderImpl implements UserBuilder {
         user.setFullName(request.getFullName());
         user.setLogin(request.getLogin());
         user.setPassword(request.getPassword());
-        user.setEmail(request.getEmail());
+//        user.setEmail(request.getEmail());
         user.setPhoneNumber(request.getPhoneNumber());
-        user.setCity(city);
-        user.setAddress(address);
+//        user.setCity(city);
+//        user.setAddress(address);
         user.setUpdatedAt(new Date());
     }
 

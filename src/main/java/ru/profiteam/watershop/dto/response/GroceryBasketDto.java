@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.profiteam.watershop.dto.request.SelectProductDto;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -11,5 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GroceryBasketDto {
     Long id;
-    String name;
+    UserDto user;
+    ProductDto product;
 }

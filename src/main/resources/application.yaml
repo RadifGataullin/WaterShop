@@ -8,9 +8,9 @@ spring:
   jpa:
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   datasource:
-#    password: 89187786606Alex
-    password: 123456
+    password: 89187786606Alex
+#    password: 123456
     url: jdbc:postgresql://localhost:5432/watershop
     username: postgres

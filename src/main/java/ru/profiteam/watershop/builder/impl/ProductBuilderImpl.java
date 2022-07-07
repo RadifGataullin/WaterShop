@@ -68,6 +68,7 @@ public class ProductBuilderImpl implements ProductBuilder {
         product.setPrice(request.getPrice());
         product.setVolume(request.getVolume());
         product.setManufacturer(manufacturer);
+        product.setSeller(seller);
         product.setUpdatedAt(new Date());
     }
 }
