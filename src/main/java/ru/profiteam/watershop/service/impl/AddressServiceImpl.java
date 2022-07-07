@@ -1,6 +1,7 @@
 package ru.profiteam.watershop.service.impl;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -17,14 +18,10 @@ import ru.profiteam.watershop.service.AddressService;
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
 
     AddressRepository addressRepository;
     AddressBuilder addressBuilder;
 
-    @Autowired
-    public AddressServiceImpl(AddressRepository addressRepository, AddressBuilder addressBuilder) {
-        this.addressRepository = addressRepository;
-        this.addressBuilder = addressBuilder;
-    }
 }

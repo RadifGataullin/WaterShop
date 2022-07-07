@@ -1,6 +1,7 @@
 package ru.profiteam.watershop.service.impl;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -21,18 +22,11 @@ import java.util.Optional;
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class SellerServiceImpl implements SellerService {
 
     SellerRepository sellerRepository;
     SellerBuilder sellerBuilder;
-
-    @Autowired
-    public SellerServiceImpl(
-            SellerRepository sellerRepository,
-            SellerBuilder sellerBuilder) {
-        this.sellerRepository = sellerRepository;
-        this.sellerBuilder = sellerBuilder;
-    }
 
     @Override
     public void create(CreateSellerDto request) {

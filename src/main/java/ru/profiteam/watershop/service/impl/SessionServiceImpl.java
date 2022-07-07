@@ -1,6 +1,7 @@
 package ru.profiteam.watershop.service.impl;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.SessionBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +13,10 @@ import ru.profiteam.watershop.repository.SessionRepository;
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class SessionServiceImpl {
     SessionRepository sessionRepository;
     SessionBuilder sessionBuilder;
 
-    @Autowired
-    public SessionServiceImpl(
-            SessionRepository sessionRepository,
-            SessionBuilder sessionBuilder) {
-        this.sessionRepository = sessionRepository;
-        this.sessionBuilder = sessionBuilder;
-    }
 
 }

@@ -1,6 +1,7 @@
 package ru.profiteam.watershop.service.impl;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -25,18 +26,11 @@ import java.util.stream.Collectors;
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class ApproveCodeServiceImpl implements ApproveCodeService {
 
     ApproveCodeRepository approveCodeRepository;
     ApproveCodeBuilder approveCodeBuilder;
-
-    @Autowired
-    public ApproveCodeServiceImpl(
-            ApproveCodeRepository approveCodeRepository,
-            ApproveCodeBuilder approveCodeBuilder) {
-        this.approveCodeRepository = approveCodeRepository;
-        this.approveCodeBuilder = approveCodeBuilder;
-    }
 
     @Override
     public void create(CreateApproveCodeDto request) {
