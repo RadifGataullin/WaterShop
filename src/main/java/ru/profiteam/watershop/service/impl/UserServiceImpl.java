@@ -1,12 +1,16 @@
 package ru.profiteam.watershop.service.impl;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ru.profiteam.watershop.builder.UserBuilder;
@@ -19,8 +23,12 @@ import ru.profiteam.watershop.repository.ApproveCodeRepository;
 import ru.profiteam.watershop.repository.UserRepository;
 import ru.profiteam.watershop.service.UserService;
 
-import java.util.List;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.hibernate.type.descriptor.java.JdbcDateTypeDescriptor.DATE_FORMAT;
 
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -88,5 +96,42 @@ public class UserServiceImpl implements UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         userRepository.deleteById(id);
+    }
+
+
+    public static void main(String[] args) {
+
+    }
+    private final String SIGNING_KEY = "weuksfjdhjkfsdd";
+
+    public String build(Long userId) {
+        List<GrantedAuthority> auths = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        auths.add(new SimpleGrantedAuthority(String.valueOf(userId)));
+
+        Date tokenLife = Date.from(Instant.now().plusSeconds(315360000));
+        return Jwts.builder()
+                .claim("authorities", auths.stream()
+                        .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(tokenLife)
+                .signWith(SignatureAlgorithm.HS256, SIGNING_KEY.getBytes())
+                .compact();
+    }
+
+
+    public Long parseJwt(String token) {
+        Objects.requireNonNull(token);
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SIGNING_KEY.getBytes())
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            List<String> authorities = claims.get("authorities", List.class);
+            return authorities.stream().findFirst().map(Long::parseLong).orElse(0L);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }
