@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
     public static void main(String[] args) {
 
     }
-    private final String SIGNING_KEY = "weuksfjdhjkfsdd";
+    private final String SIGNING_KEY = "342";
 
     public String build(Long userId) {
         List<GrantedAuthority> auths = new ArrayList<>();
