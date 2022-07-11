@@ -1,7 +1,7 @@
 package ru.profiteam.watershop.service;
 
 import ru.profiteam.watershop.dto.request.CreateUserDto;
-import ru.profiteam.watershop.dto.request.RegistrationDto;
+import ru.profiteam.watershop.dto.response.RegistrationDto;
 import ru.profiteam.watershop.dto.response.SessionDto;
 import ru.profiteam.watershop.dto.response.UserDto;
 

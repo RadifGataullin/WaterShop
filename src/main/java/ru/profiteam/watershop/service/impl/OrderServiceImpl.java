@@ -15,7 +15,7 @@ import ru.profiteam.watershop.domain.Product;
 import ru.profiteam.watershop.domain.ProductToOrder;
 import ru.profiteam.watershop.domain.User;
 import ru.profiteam.watershop.dto.request.CreateOrderDto;
-import ru.profiteam.watershop.dto.request.SelectProductDto;
+import ru.profiteam.watershop.dto.response.SelectProductDto;
 import ru.profiteam.watershop.dto.response.OrderDto;
 import ru.profiteam.watershop.repository.OrderRepository;
 import ru.profiteam.watershop.repository.ProductRepository;

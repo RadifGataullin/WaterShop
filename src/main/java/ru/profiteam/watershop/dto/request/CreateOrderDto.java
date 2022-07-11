@@ -5,9 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import ru.profiteam.watershop.domain.enums.OrderStatusType;
 import ru.profiteam.watershop.domain.enums.PayMethodType;
-import ru.profiteam.watershop.dto.response.UserDto;
+import ru.profiteam.watershop.dto.response.SelectProductDto;
 
 import java.util.List;
 

@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.profiteam.watershop.builder.UserBuilder;
 import ru.profiteam.watershop.domain.User;
 import ru.profiteam.watershop.dto.request.CreateUserDto;
-import ru.profiteam.watershop.dto.request.RegistrationDto;
+import ru.profiteam.watershop.dto.response.RegistrationDto;
 import ru.profiteam.watershop.dto.response.SessionDto;
 import ru.profiteam.watershop.dto.response.UserDto;
 import ru.profiteam.watershop.repository.ApproveCodeRepository;
@@ -81,7 +81,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAll() {
-        return null;
+        List<User> userList = userRepository.findAll();
+        List<UserDto> userDtoList = new ArrayList<>();
+        for(User item: userList){
+            userDtoList.add(userBuilder.build(item));
+        }
+        return userDtoList;
     }
 
     @Override

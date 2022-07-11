@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import ru.profiteam.watershop.domain.base.PersistentObject;
-import ru.profiteam.watershop.domain.enums.OrderStatusType;
 import ru.profiteam.watershop.domain.enums.PayMethodType;
-import ru.profiteam.watershop.dto.request.SelectProductDto;
 
 import javax.persistence.*;
 import java.util.List;

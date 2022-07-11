@@ -4,7 +4,7 @@ import ru.profiteam.watershop.domain.Address;
 import ru.profiteam.watershop.domain.City;
 import ru.profiteam.watershop.domain.User;
 import ru.profiteam.watershop.dto.request.CreateUserDto;
-import ru.profiteam.watershop.dto.request.RegistrationDto;
+import ru.profiteam.watershop.dto.response.RegistrationDto;
 import ru.profiteam.watershop.dto.response.UserDto;
 
 public interface UserBuilder {

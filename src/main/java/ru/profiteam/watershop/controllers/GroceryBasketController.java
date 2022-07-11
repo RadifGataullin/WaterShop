@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
+import ru.profiteam.watershop.annotation.BaseApiResponse;
+import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
 import ru.profiteam.watershop.dto.request.CreateGroceryBasketDto;
 import ru.profiteam.watershop.dto.response.GroceryBasketDto;
 import ru.profiteam.watershop.service.GroceryBasketService;
@@ -26,26 +28,33 @@ public class GroceryBasketController {
         this.groceryBasketService = groceryBasketService;
     }
 
+    @BaseApiResponseEmpty
     @PostMapping
     public void create(@RequestBody CreateGroceryBasketDto request) {
         groceryBasketService.create(request);
     }
 
+    @BaseApiResponse
     @GetMapping()
     public List<GroceryBasketDto> getAll() {
         return groceryBasketService.getAll();
     }
 
+    @BaseApiResponse
     @GetMapping("/{id}")
-    GroceryBasketDto getById(@PathVariable Long id) {
+    public GroceryBasketDto getById(@PathVariable Long id) {
         return groceryBasketService.getById(id);
     }
+
+    @BaseApiResponseEmpty
     @PutMapping("/{id}")
-    void update(@PathVariable Long id, @RequestBody GroceryBasketDto request) {
+    public void update(@PathVariable Long id, @RequestBody GroceryBasketDto request) {
         groceryBasketService.update(id, request);
     }
+
+    @BaseApiResponseEmpty
     @DeleteMapping("/{id}")
-    void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id) {
         groceryBasketService.deleteById(id);
     }
 }
