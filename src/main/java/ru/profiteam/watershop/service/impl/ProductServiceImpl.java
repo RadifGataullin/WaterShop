@@ -94,4 +94,16 @@ public class ProductServiceImpl implements ProductService {
         }
         productRepository.deleteById(id);
     }
+
+    @Override
+    public List<ProductDto> filter(List<Long> manufacturersIds, Integer minPrice, Integer maxPrice, List<Long> sellersIds, Float minVolume, Float maxVolume) {
+        List<Product> productList = productRepository.filter(manufacturersIds, minPrice, maxPrice, sellersIds, minVolume, maxVolume);
+        List<ProductDto> productDtoList = new ArrayList<>();
+        for(Product item: productList){
+            productDtoList.add(productBuilder.build(item));
+        }
+        return productDtoList;
+    }
+
+
 }

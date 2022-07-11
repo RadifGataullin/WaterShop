@@ -11,4 +11,6 @@ public interface ProductService {
     ProductDto getById(Long id);
     void update(Long id, CreateProductDto request);
     void deleteById(Long id);
+
+    List<ProductDto> filter(List<Long> manufacturersIds, Integer minPrice, Integer maxPrice, List<Long> sellersIds, Float minVolume, Float maxVolume);
 }

@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import ru.profiteam.watershop.dto.request.CreateCountryDto;
 import ru.profiteam.watershop.dto.request.CreateProductDto;
-import ru.profiteam.watershop.dto.response.CountryDto;
 import ru.profiteam.watershop.dto.response.ProductDto;
 import ru.profiteam.watershop.service.ProductService;
 import ru.profiteam.watershop.utils.ErrorSwaggerModel;
@@ -79,5 +76,20 @@ public class ProductController {
         productService.deleteById(id);
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Success"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
+    @GetMapping("filter")
+    public List<ProductDto> filter(@RequestParam(required = false) List<Long> manufacturersIds,
+                                   @RequestParam(required = false) Integer minPrice,
+                                   @RequestParam(required = false) Integer maxPrice,
+                                   @RequestParam(required = false) List<Long> sellersIds,
+                                   @RequestParam(required = false) Float minVolume,
+                                   @RequestParam(required = false) Float maxVolume) {
+        return productService.filter(manufacturersIds, minPrice, maxPrice, sellersIds, minVolume, maxVolume);
+    }
 
 }
