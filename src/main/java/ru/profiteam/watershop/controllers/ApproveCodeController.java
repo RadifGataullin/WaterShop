@@ -11,20 +11,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
+import ru.profiteam.watershop.controllers.base.AuthorizationController;
 import ru.profiteam.watershop.dto.request.CreateApproveCodeDto;
 import ru.profiteam.watershop.dto.response.ApproveCodeDto;
 import ru.profiteam.watershop.service.ApproveCodeService;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @RestController
 @RequestMapping("approve_code")
 @Tag(name = "Approve_code")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ApproveCodeController {
+public class ApproveCodeController extends AuthorizationController {
     ApproveCodeService approveCodeService;
 
     @Autowired
-    public ApproveCodeController(ApproveCodeService approveCodeService) {
+    public ApproveCodeController(ApproveCodeService approveCodeService, HttpServletRequest request) {
+        super(request);
         this.approveCodeService = approveCodeService;
     }
 

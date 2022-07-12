@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import ru.profiteam.watershop.annotation.BaseApiResponse;
 import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
+import ru.profiteam.watershop.controllers.base.AuthorizationController;
 import ru.profiteam.watershop.dto.request.CreateManufacturerDto;
 import ru.profiteam.watershop.dto.response.ManufacturerDto;
 import ru.profiteam.watershop.service.ManufacturerService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -20,12 +22,13 @@ import java.util.List;
 @RequestMapping("manufacturer")
 @Tag(name = "Manufacturer")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ManufacturerController {
+public class ManufacturerController extends AuthorizationController {
 
     ManufacturerService manufacturerService;
 
     @Autowired
-    public ManufacturerController(ManufacturerService manufacturerService) {
+    public ManufacturerController(ManufacturerService manufacturerService, HttpServletRequest request) {
+        super(request);
         this.manufacturerService = manufacturerService;
     }
 

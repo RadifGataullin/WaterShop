@@ -14,3 +14,6 @@ spring:
 #    password: 123456
     url: jdbc:postgresql://localhost:5432/watershop
     username: postgres
+
+module-name: waterShop
+api-version: 1.0

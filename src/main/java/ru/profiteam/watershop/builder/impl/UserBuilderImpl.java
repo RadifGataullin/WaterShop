@@ -74,6 +74,7 @@ public class UserBuilderImpl implements UserBuilder {
         User user = new User();
         user.setPassword(DigestUtils.md5DigestAsHex(request.getPassword().getBytes()));
         user.setLogin(request.getLogin());
+        user.setPhoneNumber(request.getLogin());
         user.setCreatedAt(new Date());
         return user;
     }

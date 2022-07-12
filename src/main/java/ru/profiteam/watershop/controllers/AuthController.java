@@ -9,9 +9,12 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.profiteam.watershop.annotation.BaseApiResponse;
 import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
+import ru.profiteam.watershop.dto.response.AuthDto;
 import ru.profiteam.watershop.dto.response.RegistrationDto;
-import ru.profiteam.watershop.service.UserService;
+import ru.profiteam.watershop.dto.response.SecurityAuthDto;
+import ru.profiteam.watershop.service.AuthService;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @RestController
@@ -19,11 +22,18 @@ import ru.profiteam.watershop.service.UserService;
 @Tag(name = "Authorization")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthController {
-    UserService userService;
+    AuthService authService;
 
     @Autowired
-    public AuthController(UserService userService) {
-        this.userService = userService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @Operation(summary = "Авторизация пользователя")
+    @BaseApiResponse
+    @GetMapping("authorization")
+    public SecurityAuthDto auth(AuthDto request){
+        return authService.auth(request);
     }
 
     @Operation(summary = "Регистрация пользователя")
@@ -31,6 +41,8 @@ public class AuthController {
     @PostMapping("registration")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void registration(@RequestBody RegistrationDto request) {
-        userService.create(request);
+        authService.registration(request);
     }
+
+
 }

@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import ru.profiteam.watershop.annotation.BaseApiResponse;
 import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
+import ru.profiteam.watershop.controllers.base.AuthorizationController;
 import ru.profiteam.watershop.dto.request.CreateGroceryBasketDto;
 import ru.profiteam.watershop.dto.response.GroceryBasketDto;
 import ru.profiteam.watershop.service.GroceryBasketService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -20,11 +22,12 @@ import java.util.List;
 @RequestMapping("grocery_basket")
 @Tag(name = "Grocery_basket")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class GroceryBasketController {
+public class GroceryBasketController extends AuthorizationController {
     GroceryBasketService groceryBasketService;
 
     @Autowired
-    public GroceryBasketController(GroceryBasketService groceryBasketService) {
+    public GroceryBasketController(GroceryBasketService groceryBasketService, HttpServletRequest request) {
+        super(request);
         this.groceryBasketService = groceryBasketService;
     }
 

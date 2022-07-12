@@ -13,11 +13,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import ru.profiteam.watershop.annotation.BaseApiResponse;
 import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
+import ru.profiteam.watershop.controllers.base.AuthorizationController;
 import ru.profiteam.watershop.dto.request.CreateProductDto;
 import ru.profiteam.watershop.dto.response.ProductDto;
 import ru.profiteam.watershop.service.ProductService;
 import ru.profiteam.watershop.utils.ErrorSwaggerModel;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -25,12 +27,13 @@ import java.util.List;
 @RequestMapping("product")
 @Tag(name = "Product")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ProductController {
+public class ProductController extends AuthorizationController {
     ProductService productService;
 
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, HttpServletRequest request) {
+        super(request);
         this.productService = productService;
     }
 

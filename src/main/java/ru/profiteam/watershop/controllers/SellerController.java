@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import ru.profiteam.watershop.annotation.BaseApiResponse;
 import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
+import ru.profiteam.watershop.controllers.base.AuthorizationController;
 import ru.profiteam.watershop.dto.request.CreateSellerDto;
 import ru.profiteam.watershop.dto.response.SellerDto;
 import ru.profiteam.watershop.service.SellerService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -21,11 +23,12 @@ import java.util.List;
 @Tag(name = "Seller")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
-public class SellerController {
+public class SellerController extends AuthorizationController {
     SellerService sellerService;
 
     @Autowired
-    public SellerController(SellerService sellerService) {
+    public SellerController(SellerService sellerService, HttpServletRequest request) {
+        super(request);
         this.sellerService = sellerService;
     }
 
