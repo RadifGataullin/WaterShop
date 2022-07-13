@@ -30,10 +30,10 @@ public class Product extends PersistentObject {
     ProductContainerMaterialType productContainerMaterialType;
 
     @Column(name = "price")
-    int price;
+    Integer price;
 
     @Column(name = "volume")
-    float volume;
+    Float volume;
 
     @ManyToOne
     @JoinColumn(name = "seller_id")

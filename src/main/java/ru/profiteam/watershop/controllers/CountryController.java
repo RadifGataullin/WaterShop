@@ -11,11 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
+import ru.profiteam.watershop.annotation.BaseApiResponse;
+import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
+import ru.profiteam.watershop.controllers.base.AuthorizationController;
 import ru.profiteam.watershop.dto.request.CreateCountryDto;
 import ru.profiteam.watershop.dto.response.CountryDto;
 import ru.profiteam.watershop.service.CountryService;
 import ru.profiteam.watershop.utils.ErrorSwaggerModel;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -23,67 +27,43 @@ import java.util.List;
 @RequestMapping("country")
 @Tag(name = "Country")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CountryController {
+public class CountryController extends AuthorizationController {
 
     CountryService countryService;
 
     @Autowired
-    public CountryController(CountryService countryService) {
+    public CountryController(CountryService countryService, HttpServletRequest request) {
+        super(request);
         this.countryService = countryService;
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
-    @PostMapping()
+    @BaseApiResponseEmpty
+    @PostMapping
     public void create(@RequestBody CreateCountryDto request) {
         countryService.create(request);
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
-    @GetMapping()
+    @BaseApiResponse
+    @GetMapping
     public List<CountryDto> getAll() {
         return countryService.getAll();
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
+    @BaseApiResponse
     @GetMapping("/{id}")
-    CountryDto getById(@PathVariable Long id) {
+    public CountryDto getById(@PathVariable Long id) {
         return countryService.getById(id);
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
+    @BaseApiResponseEmpty
     @PutMapping("/{id}")
-    void update(@PathVariable Long id, @RequestBody CreateCountryDto request) {
+    public void update(@PathVariable Long id, @RequestBody CreateCountryDto request) {
         countryService.update(id, request);
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
+    @BaseApiResponseEmpty
     @DeleteMapping("/{id}")
-    void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id) {
         countryService.deleteById(id);
     }
 

@@ -11,14 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import ru.profiteam.watershop.dto.request.CreateCountryDto;
+import ru.profiteam.watershop.annotation.BaseApiResponse;
+import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
+import ru.profiteam.watershop.controllers.base.AuthorizationController;
 import ru.profiteam.watershop.dto.request.CreateProductDto;
-import ru.profiteam.watershop.dto.response.CountryDto;
 import ru.profiteam.watershop.dto.response.ProductDto;
 import ru.profiteam.watershop.service.ProductService;
 import ru.profiteam.watershop.utils.ErrorSwaggerModel;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -26,58 +27,49 @@ import java.util.List;
 @RequestMapping("product")
 @Tag(name = "Product")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ProductController {
+public class ProductController extends AuthorizationController {
     ProductService productService;
 
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, HttpServletRequest request) {
+        super(request);
         this.productService = productService;
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
-    @PostMapping()
+    @BaseApiResponseEmpty
+    @PostMapping
     public void create(@RequestBody CreateProductDto request) {
         productService.create(request);
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
-    @GetMapping()
+    @BaseApiResponse
+    @GetMapping
     public List<ProductDto> getAll() {
         return productService.getAll();
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
+    @BaseApiResponseEmpty
     @PutMapping("/{id}")
-    void update(@PathVariable Long id, @RequestBody CreateProductDto request) {
+    public void update(@PathVariable Long id, @RequestBody CreateProductDto request) {
         productService.update(id, request);
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorSwaggerModel.class)))})
+    @BaseApiResponseEmpty
     @DeleteMapping("/{id}")
-    void deleteById(@PathVariable Long id){
+    public void deleteById(@PathVariable Long id) {
         productService.deleteById(id);
     }
 
+    @BaseApiResponse
+    @GetMapping("filter")
+    public List<ProductDto> filter(@RequestParam(required = false) List<Long> manufacturersIds,
+                                   @RequestParam(required = false) Integer minPrice,
+                                   @RequestParam(required = false) Integer maxPrice,
+                                   @RequestParam(required = false) List<Long> sellersIds,
+                                   @RequestParam(required = false) Float minVolume,
+                                   @RequestParam(required = false) Float maxVolume) {
+        return productService.filter(manufacturersIds, minPrice, maxPrice, sellersIds, minVolume, maxVolume);
+    }
 
 }

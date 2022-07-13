@@ -1,4 +1,4 @@
-package ru.profiteam.watershop.dto.request;
+package ru.profiteam.watershop.dto.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RegistrationDto {
-    String login;
-    String password;
+public class SelectProductDto {
+    Long productId;
+    Integer count;
 }

@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.profiteam.watershop.builder.AddressBuilder;
 import ru.profiteam.watershop.builder.CityBuilder;
-import ru.profiteam.watershop.builder.UserBuilder;
 import ru.profiteam.watershop.domain.Address;
 import ru.profiteam.watershop.domain.City;
 import ru.profiteam.watershop.domain.User;
