@@ -18,7 +18,6 @@ import ru.profiteam.watershop.dto.response.SecurityAuthDto;
 import ru.profiteam.watershop.repository.ApproveCodeRepository;
 import ru.profiteam.watershop.repository.UserRepository;
 import ru.profiteam.watershop.service.AuthService;
-import ru.profiteam.watershop.service.TokenService;
 
 import java.util.Optional;
 
@@ -30,7 +29,6 @@ public class AuthServiceImpl implements AuthService {
     ApproveCodeRepository approveCodeRepository;
     UserRepository userRepository;
     UserBuilder userBuilder;
-    TokenService tokenService;
     SecurityAuthBuilder securityAuthBuilder;
 
     @Override
@@ -39,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
         if (userOpt.isEmpty() || !DigestUtils.md5DigestAsHex(request.getPassword().getBytes()).equals(userOpt.get().getPassword())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        return securityAuthBuilder.build(userOpt.get(), tokenService.buildToken(userOpt.get().getId()));
+        return securityAuthBuilder.build(userOpt.get(),  TokenHelper.buildToken(userOpt.get().getId()));
     }
 
     @Override

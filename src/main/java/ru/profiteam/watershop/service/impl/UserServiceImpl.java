@@ -7,21 +7,17 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
 import ru.profiteam.watershop.builder.UserBuilder;
 import ru.profiteam.watershop.domain.ApproveCode;
 import ru.profiteam.watershop.domain.User;
-import ru.profiteam.watershop.dto.response.RegistrationDto;
 import ru.profiteam.watershop.dto.response.UserDto;
 import ru.profiteam.watershop.repository.ApproveCodeRepository;
 import ru.profiteam.watershop.repository.UserRepository;
-import ru.profiteam.watershop.service.TokenService;
 import ru.profiteam.watershop.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -32,7 +28,6 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     UserBuilder userBuilder;
     ApproveCodeRepository approveCodeRepository;
-    TokenService tokenService;
 
 //    @Override
 //    public String auth(RegistrationDto request) {

@@ -1,19 +1,15 @@
 package ru.profiteam.watershop.controllers;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 import ru.profiteam.watershop.annotation.BaseApiResponse;
 import ru.profiteam.watershop.annotation.BaseApiResponseEmpty;
 import ru.profiteam.watershop.controllers.base.AuthorizationController;
-import ru.profiteam.watershop.dto.response.RegistrationDto;
 import ru.profiteam.watershop.dto.response.UserDto;
 import ru.profiteam.watershop.service.UserService;
 

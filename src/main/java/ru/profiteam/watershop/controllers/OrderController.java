@@ -38,14 +38,14 @@ public class OrderController extends AuthorizationController {
     }
 
     @BaseApiResponse
-    @GetMapping
+    @GetMapping("list")
     public List<OrderDto> getAll() {
         return orderService.getAll();
     }
 
     @BaseApiResponse
-    @GetMapping("/{id}")
-    public List<OrderDto> getByUserId(@PathVariable Long id) {
-        return orderService.getByUserId(id);
+    @GetMapping
+    public List<OrderDto> getByUserId() {
+        return orderService.getByUserId(userId);
     }
 }
