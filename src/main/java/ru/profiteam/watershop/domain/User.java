@@ -32,8 +32,8 @@ public class User extends PersistentObject {
     @Column(name = "password")
     String password;
 
-//    @Column(name = "email")
-//    String email;
+    @Column(name = "email")
+    String email;
 
     @Column(name = "phone_number")
     String phoneNumber;
