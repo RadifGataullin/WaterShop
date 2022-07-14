@@ -33,8 +33,5 @@ public class DeliveryServiceMassage extends PersistentObject {
 
     @Column(name = "date")
     String date;
-
-    @Column(name = "date")
-    String jknooi;
 }
 
