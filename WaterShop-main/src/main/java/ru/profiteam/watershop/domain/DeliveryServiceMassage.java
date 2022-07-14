@@ -23,7 +23,7 @@ public class DeliveryServiceMassage extends PersistentObject {
     @ManyToOne
     @JoinColumn(name = "sender_id")
     User sender;
-
+juhikbj
     @Column(name = "context")
     String context;
 
