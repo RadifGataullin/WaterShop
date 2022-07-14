@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
+import ru.profiteam.watershop.domain.User;
 
 @Configuration
 public class OpenApi30Config {
@@ -40,4 +41,6 @@ public class OpenApi30Config {
                 )
                 .info(new Info().title(apiTitle).version(apiVersion));
     }
+
+
 }
