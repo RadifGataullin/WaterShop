@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1658319903278-1
+      author: Alexander (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropTable:
+            cascadeConstraints: true
+            tableName: testttttt
+

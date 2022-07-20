@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1658319133937-1
+      author: Alexander (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: codeeee
+            tableName: testttttt
+

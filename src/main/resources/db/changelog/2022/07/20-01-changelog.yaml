@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1658318445140-3
+      author: Alexander (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_testttttt
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  name: deleted_at
+                  type: DATETIME
+              - column:
+                  name: numberrr
+                  type: VARCHAR(255)
+              - column:
+                  name: codeeee
+                  type: VARCHAR(255)
+              - column:
+                  name: is_activatedddd
+                  type: BOOLEAN
+            tableName: testttttt
+  - changeSet:
+      id: 1658318445140-1
+      author: Alexander (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnDataType: INT
+            columnName: count
+            tableName: product_to_order
+            validate: true
+  - changeSet:
+      id: 1658318445140-2
+      author: Alexander (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnDataType: BOOLEAN
+            columnName: elevator
+            tableName: address
+            validate: true
+

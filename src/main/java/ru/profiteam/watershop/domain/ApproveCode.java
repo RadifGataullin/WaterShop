@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Table ( name = " approve_code")
+@Table ( name = "approve_code")
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ApproveCode  extends PersistentObject {

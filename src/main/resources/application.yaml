@@ -13,6 +13,8 @@ spring:
     password: 89187786606Alex
     url: jdbc:postgresql://localhost:5432/watershop
     username: postgres
+    liquibase:
+      change-log: classpath:liquibase/db/changelog/db.changelog-master.yaml
 
 module-name: waterShop
 api-version: 1.0
