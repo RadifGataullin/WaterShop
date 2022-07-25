@@ -12,7 +12,7 @@ import ru.profiteam.watershop.domain.enums.ProductType;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-    Long id;
+    long id;
     String name;
     ProductType productType;
     ProductContainerMaterialType productContainerMaterialType;

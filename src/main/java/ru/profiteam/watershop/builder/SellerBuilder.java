@@ -6,6 +6,7 @@ import ru.profiteam.watershop.dto.request.CreateSellerDto;
 import ru.profiteam.watershop.dto.response.SellerDto;
 
 public interface SellerBuilder {
+    Seller build();
 
     SellerDto build(Seller seller);
 

@@ -16,7 +16,7 @@ public class PersistentObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    long id;
 
     @Column(name = "created_at", nullable = false)
     Date createdAt;

@@ -23,6 +23,10 @@ import java.util.Date;
 public class SellerBuilderImpl implements SellerBuilder {
 
 
+    @Override
+    public Seller build() {
+        return new Seller();
+    }
 
     @Override
     public SellerDto build(Seller seller) {

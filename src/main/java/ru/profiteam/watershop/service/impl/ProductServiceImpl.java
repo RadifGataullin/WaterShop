@@ -3,7 +3,6 @@ package ru.profiteam.watershop.service.impl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -104,6 +103,4 @@ public class ProductServiceImpl implements ProductService {
         }
         return productDtoList;
     }
-
-
 }
