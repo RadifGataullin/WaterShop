@@ -1,0 +1,6 @@
+@import url('./main-layout.css');
+@import url('./views/продукты-view.css');
+@import url('./views/клиенты-view.css');
+@import url('./views/заказы-view.css');
+@import url('./views/сотрудники-view.css');
+@import url('line-awesome/dist/line-awesome/css/line-awesome.min.css');
