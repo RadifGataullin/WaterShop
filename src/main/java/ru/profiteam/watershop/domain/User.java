@@ -38,15 +38,4 @@ public class User extends PersistentObject {
     @Column(name = "phone_number")
     String phoneNumber;
 
-//    @ManyToOne
-//    @JoinColumn(name = "city_id")
-//    City city;
-
-//    @ManyToOne
-//    @JoinColumn(name = "address_id")
-//    Address address;
-
-
-
-
 }
